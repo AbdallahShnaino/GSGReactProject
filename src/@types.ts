@@ -4,6 +4,8 @@ enum InvoiceStatus {
 }
 export interface IItem {
   itemId: string;
+  itemName: string;
+  itemDescription: string;
   itemPrice: number;
   itemQuantity: number;
   itemDiscount: number;
@@ -19,4 +21,9 @@ export interface IInvoice {
   invoiceTax: string;
   invoiceGrandTotal: string;
   invoiceStatus: InvoiceStatus;
+}
+export enum Role {
+  ADMIN = "ADMIN",
+  CLIENT = "CLIENT",
+  GUEST = "GUEST",
 }
