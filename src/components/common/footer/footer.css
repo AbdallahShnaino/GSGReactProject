@@ -1,0 +1,44 @@
+footer {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  height: 120px;
+  background-color: var(--light-green);
+  justify-content: space-between;
+  padding: 1rem;
+  align-items: center;
+}
+
+footer div:last-child {
+  margin: 0 2rem;
+  display: flex;
+  gap: 2rem;
+}
+footer p {
+  color: white;
+  font-size: 14px;
+  font-family: var(--soft-sand);
+  font-weight: bold;
+}
+
+footer p a {
+  color: white;
+  text-decoration: none;
+}
+.col-1,
+.col-2 {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+.row {
+  display: flex;
+  flex-direction: row;
+  gap: 0.3rem;
+}
+.col-1 > *,
+.col-2 > * {
+  padding: 0;
+  margin: 0;
+  margin-left: 1rem;
+}

@@ -1,4 +1,4 @@
-enum InvoiceStatus {
+export enum InvoiceStatus {
   PAID = "PAID",
   UNPAID = "UNPAID",
 }
@@ -17,9 +17,9 @@ export interface IInvoice {
   invoiceDueDate: string;
   invoiceFromBusiness: string;
   invoiceToClient: string;
-  invoiceSubTotal: string;
-  invoiceTax: string;
-  invoiceGrandTotal: string;
+  invoiceSubTotal: number;
+  invoiceTax: number;
+  invoiceGrandTotal: number;
   invoiceStatus: InvoiceStatus;
 }
 export enum Role {

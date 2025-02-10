@@ -1,0 +1,81 @@
+.invoices-filters {
+  display: flex;
+  flex-flow: row wrap;
+  gap: 1.4rem;
+}
+.filter-element {
+  padding: 0;
+  margin: 0;
+  margin: 0 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  font-family: var(--open-sans-font);
+  border: none;
+}
+.filter-element h3 {
+  margin: 0.3rem 0;
+  padding: 0;
+  color: var(--black);
+  font-size: 14px;
+  padding-left: 0.6rem;
+}
+.filter-element #text-input {
+  font-family: var(--open-sans-font);
+  border: none;
+  border-bottom: 2px solid var(--gray);
+  color: var(--black);
+  padding-left: 0.6rem;
+}
+
+::placeholder {
+  color: var(--gray);
+  font-size: 14px;
+}
+
+.filter-element #text-input:focus {
+  font-family: var(--open-sans-font);
+  outline: none;
+  border-bottom: 2px solid var(--gray);
+  color: var(--black);
+  padding-left: 0.6rem;
+}
+
+.status-select select {
+  border: none;
+  outline: none;
+  appearance: none;
+  color: var(--gray);
+  background-color: transparent;
+  border-bottom: 2px solid var(--gray);
+  padding-right: 2rem;
+  position: relative;
+}
+#drop-down-arrows {
+  width: 24px;
+  height: 24px;
+}
+.filter-element .row {
+  align-items: center;
+}
+
+.filter-element > * {
+  padding: 0;
+  margin: 0;
+}
+.issue-date > h3,
+.due-date > h3 {
+  margin-top: 0.1rem;
+  padding-left: 0;
+}
+.issue-date > input,
+.due-date > input {
+  border: 1px solid var(--bright-medium-blue);
+  color: var(--gray);
+}
+
+.range h3 {
+  padding: 0;
+  margin: 0;
+  font-family: var(--oxygen-font);
+}

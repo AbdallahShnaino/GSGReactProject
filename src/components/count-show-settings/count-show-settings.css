@@ -1,0 +1,23 @@
+.show-settings button {
+  border: 1px solid var(--gray);
+  border-radius: 8px;
+  background: transparent;
+  margin: 0.6rem;
+  cursor: pointer;
+}
+.show-settings button:disabled {
+  cursor: default;
+}
+.show-settings {
+  margin: 1rem 0;
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+.show-settings span {
+  font-family: var(--open-sans-font);
+  color: var(--blue-black);
+}
+.show-settings select {
+  margin: 0 1rem;
+}
