@@ -27,3 +27,11 @@ export enum Role {
   CLIENT = "CLIENT",
   GUEST = "GUEST",
 }
+export interface IUser {
+  clientId :string;
+  clientName : string;
+  clientEmail:string;
+  clientAddress :string;
+  clientPhone:string;
+  clientPassword:string;
+}
