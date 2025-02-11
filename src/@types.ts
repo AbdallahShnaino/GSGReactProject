@@ -3,12 +3,20 @@ export enum InvoiceStatus {
   UNPAID = "UNPAID",
 }
 export interface IItem {
-  itemId: string;
-  itemName: string;
-  itemDescription: string;
-  itemPrice: number;
-  itemQuantity: number;
-  itemDiscount: number;
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  category: string;
+}
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  category: string;
 }
 export interface IInvoice {
   invoiceId: number;
