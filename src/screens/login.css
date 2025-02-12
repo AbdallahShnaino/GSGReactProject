@@ -39,6 +39,7 @@
     background-color: #F6FBF9 ;
     border-radius: 50px;
     padding: 16px;
+    position: relative;
 }
 .form-title{
     text-align: center;
@@ -84,6 +85,23 @@
         background-color: #31885a;
     }
 }
+@media (max-width:1020px) {
+    .up,.down{
+        height: 400px;
+        width: 400px;
+    }
+    .up{
+        left:-200px;
+        top:-200px;
+    }
+    .down{
+        right: -200px;
+        bottom:-200px;
+    }
+    .login-screen{
+        padding: 20px;
+    }
+}
 @media (max-width:720px) {
     .up,.down{
         height: 400px;
@@ -100,4 +118,7 @@
     .login-screen{
         padding: 20px;
     }
+}
+.error{
+    color: red;
 }
