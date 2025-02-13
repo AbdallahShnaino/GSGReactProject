@@ -13,16 +13,16 @@ interface IInvoicesStateContext {
   dispatch: React.Dispatch<Action>;
 }
 
-const INTI_STATE = {
+const INITIAL_STATE = {
   state: { invoicesList: [] },
   loading: true,
   dispatch: () => {},
 };
 
 export const InvoicesStateContext =
-  createContext<IInvoicesStateContext>(INTI_STATE);
+  createContext<IInvoicesStateContext>(INITIAL_STATE);
 
-const invoicesStateProvider = (props: IProps) => {
+const InvoicesStateProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(stateReducer, { invoicesList: [] });
   const { storedData, loading } = useLocalStorage(
     state.invoicesList,
@@ -38,9 +38,9 @@ const invoicesStateProvider = (props: IProps) => {
 
   return (
     <InvoicesStateContext.Provider value={{ state, loading, dispatch }}>
-      {props.children}
+      {children}
     </InvoicesStateContext.Provider>
   );
 };
 
-export default invoicesStateProvider;
+export default InvoicesStateProvider;

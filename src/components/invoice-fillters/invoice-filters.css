@@ -1,81 +1,68 @@
-.invoices-filters {
+.invoice-filters {
   display: flex;
-  flex-flow: row wrap;
-  gap: 1.4rem;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.2rem 1rem;
+  align-items: center;
+  justify-content: center;
 }
-.filter-element {
-  padding: 0;
+.invoice-filters__row {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.invoice-filters__row h3 {
   margin: 0;
-  margin: 0 5px;
+}
+.invoice-filters__element {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
   font-family: var(--open-sans-font);
-  border: none;
+  justify-content: center;
 }
-.filter-element h3 {
-  margin: 0.3rem 0;
-  padding: 0;
-  color: var(--black);
+
+.invoice-filters__element h3 {
   font-size: 14px;
-  padding-left: 0.6rem;
+  color: var(--black);
 }
-.filter-element #text-input {
-  font-family: var(--open-sans-font);
+
+.invoice-filters__element input {
   border: none;
   border-bottom: 2px solid var(--gray);
-  color: var(--black);
-  padding-left: 0.6rem;
-}
-
-::placeholder {
-  color: var(--gray);
-  font-size: 14px;
-}
-
-.filter-element #text-input:focus {
   font-family: var(--open-sans-font);
+  padding: 0.6rem;
+}
+
+.invoice-filters__element input:focus {
   outline: none;
   border-bottom: 2px solid var(--gray);
-  color: var(--black);
-  padding-left: 0.6rem;
 }
 
-.status-select select {
+.invoice-filters__select {
   border: none;
   outline: none;
   appearance: none;
   color: var(--gray);
   background-color: transparent;
   border-bottom: 2px solid var(--gray);
-  padding-right: 2rem;
-  position: relative;
 }
-#drop-down-arrows {
+
+.invoice-filters__dropdown-icon {
   width: 24px;
   height: 24px;
 }
-.filter-element .row {
-  align-items: center;
-}
 
-.filter-element > * {
-  padding: 0;
-  margin: 0;
+.invoice-filters__ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
 }
-.issue-date > h3,
-.due-date > h3 {
-  margin-top: 0.1rem;
-  padding-left: 0;
-}
-.issue-date > input,
-.due-date > input {
-  border: 1px solid var(--bright-medium-blue);
-  color: var(--gray);
-}
-
-.range h3 {
-  padding: 0;
-  margin: 0;
-  font-family: var(--oxygen-font);
+@media (max-width: 340px) {
+  .invoice-filters__element,
+  .invoice-filters__ranges {
+    width: 100%;
+  }
+  .invoice-filters__ranges {
+    gap: 0rem;
+  }
 }

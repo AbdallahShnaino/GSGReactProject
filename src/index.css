@@ -1,281 +1,119 @@
-.col-1,
-.col-2 {
-  display: flex;
-  flex-direction: column;
-  gap: 0.3rem;
-}
-.row {
-  display: flex;
-  flex-direction: row;
-  gap: 0.3rem;
-}
-.col-1 > *,
-.col-2 > * {
-  padding: 0;
+*,
+*::before,
+*::after {
   margin: 0;
-  margin-left: 1rem;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-.invoices-filters {
-  display: flex;
-  flex-flow: row wrap;
-  gap: 1.4rem;
+html,
+body {
+  height: 100%;
+  font-family: var(--oxygen-font), var(--open-sans-font) sans-serif;
+  line-height: 1.6;
+  background-color: #fff;
+  margin: 0.4rem;
 }
 
-footer {
-  display: flex;
-  height: 120px;
-  background-color: var(--light-green);
-  justify-content: space-between;
-  padding: 1rem;
-  align-items: center;
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
 }
 
-footer p {
-  color: white;
-  font-size: 14px;
-  font-family: var(--soft-sand);
-  font-weight: bold;
+section,
+article,
+div {
+  margin-bottom: 2rem;
 }
 
-footer p a {
-  color: white;
-  text-decoration: none;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 1rem 0;
 }
 
-footer {
-  display: flex;
-  height: 120px;
-  background-color: var(--light-green);
-  justify-content: space-between;
-  padding: 1rem;
-  align-items: center;
+p {
+  margin-bottom: 1.2rem;
 }
 
-footer div:last-child {
-  margin: 0 2rem;
-  display: flex;
-  gap: 2rem;
-}
-footer p {
-  color: white;
-  font-size: 14px;
-  font-family: var(--soft-sand);
-  font-weight: bold;
-}
-.invoice-more-btn {
-  display: none;
+.container {
+  padding: 2rem 1rem;
 }
 
-#logout-btn img {
-  width: 2rem;
-  height: 2rem;
-}
-#logout-btn {
-  background-color: transparent;
-  border: none;
-}
-#logout-btn:hover {
-  cursor: pointer;
-}
-#logout-btn {
-  display: none;
-}
-@media (max-width: 1400px) {
-  .filter-element h3 {
-    font-size: 16px;
-  }
-  .col-2 p:last-child {
-    width: 100%;
-  }
-  .invoice-number {
-    display: inline-block;
-  }
-  .invoice-status {
-    display: inline-block;
-  }
-  .invoice-tax {
-    display: inline-block;
-  }
-  .invoice-subtotal {
-    display: inline-block;
-  }
-  .invoice-grand-total {
-    display: inline-block;
-  }
-
-  a .invoice-element {
-    gap: 0.5rem;
-    font-size: 12px;
-  }
-  .invoice-element {
-    gap: 0.4rem;
-  }
-  .invoice-number {
-    display: none;
-  }
+body {
+  font-size: 1rem;
+  color: var(--black);
 }
 
-@media (max-width: 900px) {
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 10px;
-  }
-  .invoice-number {
-    display: none;
-  }
+h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1rem;
 }
 
-@media (max-width: 800px) {
-  #logout-btn {
-    display: none;
-  }
-  .client-nav ul > li:last-child {
-    display: inline-block;
-  }
-  .invoice-more-btn {
-    display: inline-block;
-  }
-  .col-2 p:last-child {
-    width: 50%;
-  }
-
-  .filter-element h3 {
-    font-size: 14px;
-  }
-
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-    gap: 0.1rem;
-  }
-  .item {
-    width: 100%;
-  }
-  .invoice-more-btn {
-    display: none;
-  }
+h2 {
+  font-size: 2rem;
+  margin-bottom: 0.8rem;
 }
 
-@media (max-width: 550px) {
-  #logout-btn {
-    display: inline-block;
-  }
-  .client-nav ul > li:last-child {
-    display: none;
-  }
-  .invoice-more-btn {
-    display: inline-block;
-  }
-  .invoice-number {
-    display: none;
-  }
-  .invoice-status {
-    display: none;
-  }
-  .invoice-tax {
-    display: none;
-  }
-  .invoice-subtotal {
-    display: none;
-  }
-  .invoice-grand-total {
-    display: none;
+h3 {
+  font-size: 1.75rem;
+  margin-bottom: 0.6rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+  margin-bottom: 0.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+  margin-bottom: 0.4rem;
+}
+
+h6 {
+  font-size: 1rem;
+  margin-bottom: 0.3rem;
+}
+
+@media (max-width: 768px) {
+  body {
+    font-size: 0.875rem;
   }
 
-  .invoices-filters {
-    display: flex;
-    flex-direction: column;
+  h1 {
+    font-size: 2.2rem;
   }
-  .invoices-filters input,
-  .invoices-filters select {
-    width: 100%;
+
+  h2 {
+    font-size: 1.8rem;
   }
-  .client-info {
-    display: flex;
-    flex-direction: column;
+
+  h3 {
+    font-size: 1.2rem;
   }
-  .client-info .col-1 {
-    padding: 1rem 0;
+
+  h4 {
+    font-size: 0.8rem;
   }
-  .client-info .col-2 {
-    padding: 1rem 0;
+
+  .container {
+    padding: 1rem;
   }
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-    gap: 0.2rem;
+
+  .card {
+    padding: 1rem;
   }
-  footer div {
-    flex-direction: column;
-    gap: 0;
+
+  h1 {
+    font-size: 2rem;
   }
-  footer div:last-child {
-    gap: 0;
-  }
-  footer {
-    flex-direction: column;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-  }
-  footer p {
-    text-align: center;
-  }
-}
-@media (max-width: 340px) {
-  #logout-btn {
-    display: inline-block;
-  }
-  .client-nav ul > li:last-child {
-    display: none;
-  }
-  footer div {
-    flex-direction: column;
-    gap: 0;
-  }
-  footer div:last-child {
-    gap: 0;
-  }
-  footer {
-    flex-direction: column;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-  }
-  footer p {
-    text-align: center;
-  }
-  .invoice-element {
-    gap: 0.2rem;
-  }
-  .show-settings {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 12px;
-  }
-  .show-settings button {
-    width: 24px;
-    width: 24px;
-    border: 1px solid var(--gray);
-    border-radius: 8px;
-    font-size: 6px;
-    background: transparent;
-  }
-  .show-settings button img {
-    width: 16px;
-    width: 16px;
-  }
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-  }
-  .show-settings {
-    margin: 1rem 0;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+
+  p {
+    font-size: 0.9rem;
   }
 }
