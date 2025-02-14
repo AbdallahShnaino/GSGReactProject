@@ -35,3 +35,12 @@ export enum Role {
   CLIENT = "CLIENT",
   GUEST = "GUEST",
 }
+export interface IUser {
+  email: string;
+  id: string;
+}
+
+export interface IAuthState {
+  user: IUser | null;
+  isAuthenticated: boolean;
+}
