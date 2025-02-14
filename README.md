@@ -48,8 +48,8 @@ Ensure you have the following installed:
 ### Steps to Run
 1. Clone the repository:
    ```sh
-   git clone https://github.com/YOUSEF-SHNAINO/invoice-generator.git
-   cd invoice-generator
+   git clone [https://github.com/YOUSEF-SHNAINO/invoice-generator.git](https://github.com/AbdallahShnaino/GSGReactProject)
+   cd GSGReactProject
    ```
 2. Install dependencies:
    ```sh
@@ -59,7 +59,7 @@ Ensure you have the following installed:
    ```sh
    npm start
    ```
-4. Access the app at `http://localhost:3000`
+4. Access the app at `http://localhost:5173`
 
 ## 📌 Usage Guide
 1. **Sign up** or **log in** to access the app.
