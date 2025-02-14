@@ -41,12 +41,9 @@ export enum Role {
 }
 
 export interface IUser {
-  clientId :string;
-  clientName : string;
-  clientEmail:string;
-  clientAddress :string;
-  clientPhone:string;
-  clientPassword:string;
+  email: string;
+  id: string;
+  role: Role;
 }
 
 export interface IAuthState {
