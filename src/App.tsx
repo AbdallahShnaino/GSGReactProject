@@ -6,12 +6,15 @@ import ClientScreen from "./screens/client.screen";
 import Guarded from "./components/common/guarded-route/guarded-route.component";
 import NotFound from "./screens/not-found.screen";
 import HomeScreen from "./screens/home.screen";
+import ManualLogoutScreen from "./screens/manualLogout/ManualLogoutScreen";
 
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
+        <Route path="/logout" element={<ManualLogoutScreen />} />
+        <Route path="/admin" element={<InvoiceListScreen />} />
         <Route
           path="/client"
           element={

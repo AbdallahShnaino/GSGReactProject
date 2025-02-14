@@ -1,8 +1,11 @@
 import "./header.css";
 import logo from "./../../../assets/WE_GROW.png";
-import logout from "./../../../assets/log-out.png";
+import logoutIcon from "./../../../assets/log-out.png";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/auth-provider";
 
 const Header = () => {
+  const { logout } = useContext(AuthContext);
   return (
     <nav className="header">
       <ul className="header__nav">
@@ -11,8 +14,8 @@ const Header = () => {
         </li>
         <li className="header__logout-text">Logout</li>
       </ul>
-      <button className="header__logout-btn">
-        <img src={logout} alt="log out" />
+      <button className="header__logout-btn" onClick={logout}>
+        <img src={logoutIcon} alt="log out" />
       </button>
     </nav>
   );

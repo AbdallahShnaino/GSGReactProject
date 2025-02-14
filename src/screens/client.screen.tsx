@@ -5,12 +5,11 @@ import Footer from "../components/common/footer/footer";
 import InvoiceFilters from "../components/invoice-fillters/invoice-filters";
 import CountShowSettings from "../components/count-show-settings/count-show-settings";
 import personImage from "./../assets/person.png";
-import { IInvoice } from "../@types";
+import { IInvoice, InvoiceStatus } from "../@types";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { InvoicesStateContext } from "../providers/invoices-state.provider";
-//import { AuthContext } from "../providers/auth-provider";
-
+import { AuthContext } from "../providers/auth-provider";
 const ClientScreen = () => {
   const [params, setParams] = useSearchParams();
   const { state, loading } = useContext(InvoicesStateContext);
@@ -21,10 +20,12 @@ const ClientScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
-  // const { user } = useContext(AuthContext);
+  const { user } = useContext(AuthContext);
   useEffect(() => {
     setFiltering(true);
-    let filteredList = invoicesList;
+    let filteredList = invoicesList.filter(
+      (invoice) => invoice.invoiceToClient == user?.id
+    );
 
     const company = params.get("company") || "";
     const invoiceNumber = params.get("inv-num") || "";
@@ -93,7 +94,9 @@ const ClientScreen = () => {
         );
       }
     } else {
-      filteredList = invoicesList;
+      filteredList = invoicesList.filter(
+        (invoice) => invoice.invoiceToClient == user?.id
+      );
     }
     const totalInvoices = filteredList.length;
     setTotalPages(Math.ceil(totalInvoices / itemsPerPage));
@@ -134,7 +137,6 @@ const ClientScreen = () => {
         <section className="client__header">
           <Header />
         </section>
-        <button onClick={() => {}}>LOG IN</button>
         <section>
           <section className="client__info">
             <img
@@ -144,28 +146,47 @@ const ClientScreen = () => {
             />
             <div className="client__info-col">
               <h3 className="client__info-title">Name</h3>
-              <p className="client__info-text">Richa Verma</p>
+              <p className="client__info-text">{user?.name}</p>
               <h3 className="client__info-title">Phone</h3>
-              <p className="client__info-text">(+91) 919438776</p>
+              <p className="client__info-text">{user?.phone}</p>
             </div>
             <div className="client__info-col">
               <h3 className="client__info-title">Email</h3>
-              <p className="client__info-text">Richa_Verma@home.com</p>
+              <p className="client__info-text">{user?.email}</p>
               <h3 className="client__info-title">Address</h3>
-              <p className="client__info-text">
-                5-5-102/1, 1st Floor, Anasuya, Behind Ganji Enterprises,
-                Ranigunj
-              </p>
+              <p className="client__info-text">{user?.address}</p>
             </div>
             <div className="client__overview-col">
               <h3 className="client__overview-title">
                 Number of Associated Invoices
               </h3>
-              <p className="client__overview-text">123</p>
+              <p className="client__overview-text">
+                {
+                  invoicesList.filter((inv) => inv.invoiceToClient == user?.id)
+                    .length
+                }
+              </p>
               <h3 className="client__overview-title">Paid</h3>
-              <p className="client__overview-text">123</p>
+              <p className="client__overview-text">
+                {
+                  invoicesList.filter(
+                    (inv) =>
+                      inv.invoiceToClient == user?.id &&
+                      inv.invoiceStatus == InvoiceStatus.PAID
+                  ).length
+                }
+              </p>
               <h3 className="client__overview-title">Waiting to Pay</h3>
-              <p className="client__overview-text">123</p>
+              <p className="client__overview-text">
+                {" "}
+                {
+                  invoicesList.filter(
+                    (inv) =>
+                      inv.invoiceToClient == user?.id &&
+                      inv.invoiceStatus == InvoiceStatus.UNPAID
+                  ).length
+                }
+              </p>
             </div>
           </section>
         </section>

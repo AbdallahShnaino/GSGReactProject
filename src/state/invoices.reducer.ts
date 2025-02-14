@@ -1,15 +1,11 @@
-import { useContext } from "react";
 import { IInvoice } from "../@types";
-import { AuthContext } from "../providers/auth-provider";
 
 export type State = {
   invoicesList: IInvoice[];
 };
-const { user } = useContext(AuthContext);
 export type Action =
   | { type: "INIT"; payload: IInvoice[] }
-  | { type: "GET_CLIENT_INVOICES" };
-
+  | { type: "GET_CLIENT_INVOICES"; payload: string };
 export const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "INIT":
@@ -21,11 +17,9 @@ export const stateReducer = (state: State, action: Action): State => {
     case "GET_CLIENT_INVOICES":
       return {
         ...state,
-        invoicesList: user
-          ? state.invoicesList.filter(
-              (invoice) => invoice.invoiceToClient == user?.id
-            )
-          : state.invoicesList,
+        invoicesList: state.invoicesList.filter(
+          (invoice) => invoice.invoiceToClient == action.payload
+        ),
       };
 
     default:
