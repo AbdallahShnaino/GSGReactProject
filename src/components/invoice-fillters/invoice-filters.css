@@ -1,0 +1,68 @@
+.invoice-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.4rem;
+  margin: 0.2rem 1rem;
+  align-items: center;
+  justify-content: center;
+}
+.invoice-filters__row {
+  display: flex;
+  align-items: center;
+  margin-top: 1rem;
+}
+.invoice-filters__row h3 {
+  margin: 0;
+}
+.invoice-filters__element {
+  display: flex;
+  flex-direction: column;
+  font-family: var(--open-sans-font);
+  justify-content: center;
+}
+
+.invoice-filters__element h3 {
+  font-size: 14px;
+  color: var(--black);
+}
+
+.invoice-filters__element input {
+  border: none;
+  border-bottom: 2px solid var(--gray);
+  font-family: var(--open-sans-font);
+  padding: 0.6rem;
+}
+
+.invoice-filters__element input:focus {
+  outline: none;
+  border-bottom: 2px solid var(--gray);
+}
+
+.invoice-filters__select {
+  border: none;
+  outline: none;
+  appearance: none;
+  color: var(--gray);
+  background-color: transparent;
+  border-bottom: 2px solid var(--gray);
+}
+
+.invoice-filters__dropdown-icon {
+  width: 24px;
+  height: 24px;
+}
+
+.invoice-filters__ranges {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.4rem;
+}
+@media (max-width: 340px) {
+  .invoice-filters__element,
+  .invoice-filters__ranges {
+    width: 100%;
+  }
+  .invoice-filters__ranges {
+    gap: 0rem;
+  }
+}

@@ -1,0 +1,107 @@
+/* Base styles for Invoice Row */
+.invoice-row__desktop {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.invoice-row__desktop button,
+.invoice-row__details button {
+  background-color: transparent;
+  border: none;
+  border-bottom: 1px solid #ddd;
+}
+.invoice-row__desktop button:hover {
+  cursor: pointer;
+}
+
+.invoice-row__mobile-tablet {
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.invoice-row__mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-row__status--paid {
+  padding: 0.1rem;
+  color: var(--light-sea-green);
+  border: 1px solid var(--light-sea-green);
+}
+
+.invoice-row__status--unpaid {
+  padding: 0.1rem;
+  color: var(--burnt-red);
+  border: 1px solid var(--burnt-red);
+}
+
+.invoice-row__eye-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.invoice-row__details {
+  width: 90%;
+  margin: 0.5rem auto;
+  padding: 0.2rem 1rem;
+  background-color: var(--mint-green);
+  color: var(--dark-green);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  border-radius: 16px;
+}
+.invoice-row__details > * {
+  margin: 0;
+}
+
+.invoice-row__grand-total {
+  font-weight: bold;
+}
+
+.invoice-row__business-name {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+.invoice-row__business-grand-total {
+  font-size: 14px;
+  font-weight: bold;
+}
+
+@media (max-width: 1024px) {
+  /* Mobile and Tablet*/
+  .invoice-row__desktop {
+    display: none;
+  }
+
+  .invoice-row__mobile-tablet {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .invoice-row__mobile-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .invoice-row__mobile-header div {
+    margin-bottom: 0;
+    text-align: start;
+  }
+  .invoice-row__mobile-header button {
+    background-color: transparent;
+    border: none;
+    margin: 0.7rem 0;
+  }
+}

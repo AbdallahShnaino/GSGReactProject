@@ -1,32 +1,45 @@
-enum InvoiceStatus {
+export enum InvoiceStatus {
   PAID = "PAID",
   UNPAID = "UNPAID",
 }
+
 export interface IItem {
-  itemId: string;
-  itemName: string;
-  itemDescription: string;
-  itemPrice: number;
-  itemQuantity: number;
-  itemDiscount: number;
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  category: string;
 }
-export interface IInvoice {
+
+export interface Product {
+  id: number;
+  name: string;
+  price: number;
+  quantity: number;
+  discount: number;
+  category: string;
+}
+
+export interface Invoice {
   invoiceId: number;
   invoiceNumber: string;
   invoiceIssueDate: string;
   invoiceDueDate: string;
   invoiceFromBusiness: string;
   invoiceToClient: string;
-  invoiceSubTotal: string;
-  invoiceTax: string;
-  invoiceGrandTotal: string;
+  invoiceSubTotal: number;
+  invoiceTax: number;
+  invoiceGrandTotal: number;
   invoiceStatus: InvoiceStatus;
 }
+
 export enum Role {
   ADMIN = "ADMIN",
   CLIENT = "CLIENT",
   GUEST = "GUEST",
 }
+
 export interface IUser {
   clientId :string;
   clientName : string;
@@ -34,4 +47,9 @@ export interface IUser {
   clientAddress :string;
   clientPhone:string;
   clientPassword:string;
+}
+
+export interface IAuthState {
+  user: IUser | null;
+  isAuthenticated: boolean;
 }

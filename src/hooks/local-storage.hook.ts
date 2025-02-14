@@ -18,7 +18,7 @@ const useLocalStorage = (state: any, storageKey: string) => {
     } catch {
       setStoredData({ data: strData || null, loading: false });
     }
-  }, []);
+  }, [storageKey]);
 
   useEffect(() => {
     if (isInitialMount.current) {
@@ -26,8 +26,13 @@ const useLocalStorage = (state: any, storageKey: string) => {
       return;
     }
 
-    if (typeof state === "object") {
-      localStorage.setItem(storageKey, JSON.stringify(state));
+    if (typeof state === "object" && state !== null) {
+      const storedState = localStorage.getItem(storageKey);
+      const parsedState = storedState ? JSON.parse(storedState) : null;
+
+      if (JSON.stringify(parsedState) !== JSON.stringify(state)) {
+        localStorage.setItem(storageKey, JSON.stringify(state));
+      }
     } else if (state === null) {
       localStorage.removeItem(storageKey);
     } else {

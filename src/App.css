@@ -1,0 +1,22 @@
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  --burnt-red: #b23b3b;
+  --soft-red: #db4646;
+  --soft-sand: #efe3c2;
+  --dark-green: #25563d;
+  --light-green: #42a570;
+  --light-sea-green: #7fc008;
+  --mint-green: #9adbb8;
+  --blue-black: #00072b;
+  --gray: #aaaaaa;
+  --white: #ffffff;
+  --light-gray: #cccccc;
+  --black: #000000;
+  --bright-medium-blue: #0095e5;
+  --warm-orange: #c78939;
+  --deep-teal: #31885a;
+  --oxygen-font: "Oxygen", serif;
+  --roboto-font: "Roboto", serif;
+  --open-sans-font: "Open Sans", serif;
+}
