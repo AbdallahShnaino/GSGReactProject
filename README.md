@@ -48,7 +48,7 @@ Ensure you have the following installed:
 ### Steps to Run
 1. Clone the repository:
    ```sh
-   git clone [https://github.com/AbdallahShnaino/GSGReactProject](https://github.com/AbdallahShnaino/GSGReactProject)
+   git clone https://github.com/AbdallahShnaino/GSGReactProject
    cd GSGReactProject
    ```
 2. Install dependencies:
