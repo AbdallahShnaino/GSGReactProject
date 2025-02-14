@@ -1,50 +1,95 @@
-# React + TypeScript + Vite
+# 🌟 Invoice Generator App
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## 📌 Overview
+The **Invoice Generator App** is a powerful tool that simplifies invoice creation, management, and tracking. Built with modern web technologies, it offers a seamless and intuitive user experience.
 
-Currently, two official plugins are available:
+## ✨ Features
+### 🔐 User Authentication
+- Secure email/password login with validation.
+- Optional guest mode for quick access.
+- Persistent login state using local storage.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+### 📝 Create Invoices
+#### 📄 Invoice Details:
+- Auto-generate or manually enter invoice numbers.
+- Easily select issue and due dates with a date picker.
+- Define sender (**From**) and recipient (**To**) details, including name, email, and address.
 
-## Expanding the ESLint configuration
+#### 📊 Items Table:
+- Dynamically add or remove invoice items.
+- Auto-calculate subtotal, taxes (e.g., 10%), and total amount.
+- Apply discounts (fixed amount or percentage).
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+#### 🖨️ Additional Features:
+- Preview invoices in a clean, print-ready format.
+- Save invoices locally using local storage.
 
-- Configure the top-level `parserOptions` property like this:
+### 📋 Invoice Management
+#### 📑 Invoice List:
+- View invoices with key details such as number, client, total, and status.
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+#### 🔍 Filters & Search:
+- Filter invoices by date range, client name, or status (Paid/Unpaid).
+- Search invoices using invoice number or client name.
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+#### ⚡ Actions:
+- Edit, delete, or export invoices.
+- Mark invoices as **Paid** or **Unpaid**.
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+## 🚀 Tech Stack
+- **Frontend:** React.js
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
-```
+## 🛠 Installation
+### Prerequisites
+Ensure you have the following installed:
+- [Node.js](https://nodejs.org/) (Latest LTS version)
+- npm or yarn
+
+### Steps to Run
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/YOUSEF-SHNAINO/invoice-generator.git
+   cd invoice-generator
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm start
+   ```
+4. Access the app at `http://localhost:3000`
+
+## 📌 Usage Guide
+1. **Sign up** or **log in** to access the app.
+2. **Create a new invoice** by entering client details.
+3. **Customize** the invoice with items, discounts, and taxes.
+4. **Preview, save, or export** the invoice as needed.
+5. **Track payments** and manage invoices efficiently.
+
+## 🤝 Contribution
+We welcome contributions! To contribute:
+1. **Fork** the repository.
+2. **Create a new branch** (`feature-branch-name`).
+3. **Commit your changes** with clear messages.
+4. **Open a pull request** to merge your changes.
+
+## 📜 License
+This project is licensed under the **MIT License & GSG**.
+
+## 👥 Meet the Team
+- **Abdallah Shnaino** - Team Manager
+- **Sary Sultan** - Developer
+- **Muhammad Kasati** - Developer
+- **Amjad Shabaneh** - Developer
+- **Mohammad Khaseeb** - Developer
+
+## 📬 Contact
+For inquiries or collaborations:
+- **GitHub:** [Abdallah Shnaino](https://github.com/AbdallahShnaino)
+- **Email:** abdallah.shnaino@gmail.com
+
+---
+🚀 *Empowering businesses with seamless invoice management!*
+
