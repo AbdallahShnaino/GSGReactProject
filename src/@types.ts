@@ -41,7 +41,11 @@ export enum Role {
 }
 
 export interface IUser {
+  name: string;
+  address: string;
   email: string;
+  phone: string;
+  password: string;
   id: string;
   role: Role;
 }
