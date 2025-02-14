@@ -12,7 +12,7 @@ export interface IItem {
   category: string;
 }
 
-export interface Product {
+export interface IProduct {
   id: number;
   name: string;
   price: number;
@@ -21,7 +21,7 @@ export interface Product {
   category: string;
 }
 
-export interface Invoice {
+export interface IInvoice {
   invoiceId: number;
   invoiceNumber: string;
   invoiceIssueDate: string;

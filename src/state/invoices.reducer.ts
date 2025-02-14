@@ -1,13 +1,14 @@
+import { useContext } from "react";
 import { IInvoice } from "../@types";
+import { AuthContext } from "../providers/auth-provider";
 
 export type State = {
   invoicesList: IInvoice[];
 };
-
+const { user } = useContext(AuthContext);
 export type Action =
   | { type: "INIT"; payload: IInvoice[] }
-  | { type: "ADD_INVOICE"; payload: IInvoice }
-  | { type: "ADD_INVOICES"; payload: IInvoice[] };
+  | { type: "GET_CLIENT_INVOICES" };
 
 export const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -17,15 +18,14 @@ export const stateReducer = (state: State, action: Action): State => {
         invoicesList: action.payload,
       };
 
-    case "ADD_INVOICE":
+    case "GET_CLIENT_INVOICES":
       return {
         ...state,
-        invoicesList: [action.payload, ...state.invoicesList],
-      };
-    case "ADD_INVOICES":
-      return {
-        ...state,
-        invoicesList: action.payload,
+        invoicesList: user
+          ? state.invoicesList.filter(
+              (invoice) => invoice.invoiceToClient == user?.id
+            )
+          : state.invoicesList,
       };
 
     default:
