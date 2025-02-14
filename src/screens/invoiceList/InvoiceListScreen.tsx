@@ -1,18 +1,18 @@
 import React, { useState, useEffect } from "react";
 import { Search, Calendar, Edit2, Trash2, Download, X } from "lucide-react";
-import { Invoice, InvoiceStatus } from "../../@types";
+import { IInvoice, InvoiceStatus } from "../../@types";
 import Logo from "../../assets/WE_GROW.png";
 import "./invoiceListScreen.css";
 import jsPDF from "jspdf";
 
 interface EditModalProps {
-  invoice: Invoice | null;
+  invoice: IInvoice | null;
   onClose: () => void;
-  onSave: (invoice: Invoice) => void;
+  onSave: (invoice: IInvoice) => void;
 }
 
 const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
-  const [editedInvoice, setEditedInvoice] = useState<Invoice>(
+  const [editedInvoice, setEditedInvoice] = useState<IInvoice>(
     invoice || {
       invoiceId: 0,
       invoiceNumber: "",
@@ -116,7 +116,7 @@ const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
 };
 
 const InvoiceListScreen: React.FC = () => {
-  const [invoices, setInvoices] = useState<Invoice[]>([
+  const [invoices, setInvoices] = useState<IInvoice[]>([
     {
       invoiceId: 1,
       invoiceNumber: "INV-001",
@@ -187,7 +187,7 @@ const InvoiceListScreen: React.FC = () => {
   });
 
   const [filteredInvoices, setFilteredInvoices] = useState(invoices);
-  const [editingInvoice, setEditingInvoice] = useState<Invoice | null>(null);
+  const [editingInvoice, setEditingInvoice] = useState<IInvoice | null>(null);
 
   useEffect(() => {
     let result = invoices;
@@ -226,11 +226,11 @@ const InvoiceListScreen: React.FC = () => {
     setInvoices(invoices.filter((invoice) => invoice.invoiceId !== id));
   };
 
-  const handleEdit = (invoice: Invoice) => {
+  const handleEdit = (invoice: IInvoice) => {
     setEditingInvoice(invoice);
   };
 
-  const handleSaveEdit = (editedInvoice: Invoice) => {
+  const handleSaveEdit = (editedInvoice: IInvoice) => {
     setInvoices(
       invoices.map((invoice) =>
         invoice.invoiceId === editedInvoice.invoiceId ? editedInvoice : invoice
@@ -239,7 +239,7 @@ const InvoiceListScreen: React.FC = () => {
     setEditingInvoice(null);
   };
 
-  const handleExport = (invoice: Invoice) => {
+  const handleExport = (invoice: IInvoice) => {
     const doc = new jsPDF();
     doc.setFontSize(20);
     doc.text("INVOICE", 105, 20, { align: "center" });
