@@ -9,6 +9,7 @@ import { IInvoice } from "../@types";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { InvoicesStateContext } from "../providers/invoices-state.provider";
+//import { AuthContext } from "../providers/auth-provider";
 
 const ClientScreen = () => {
   const [params, setParams] = useSearchParams();
@@ -20,7 +21,7 @@ const ClientScreen = () => {
   const [currentPage, setCurrentPage] = useState(1);
   const [itemsPerPage, setItemsPerPage] = useState(5);
   const [totalPages, setTotalPages] = useState(1);
-
+  // const { user } = useContext(AuthContext);
   useEffect(() => {
     setFiltering(true);
     let filteredList = invoicesList;
@@ -133,6 +134,7 @@ const ClientScreen = () => {
         <section className="client__header">
           <Header />
         </section>
+        <button onClick={() => {}}>LOG IN</button>
         <section>
           <section className="client__info">
             <img

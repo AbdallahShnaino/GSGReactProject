@@ -38,6 +38,7 @@ export enum Role {
 export interface IUser {
   email: string;
   id: string;
+  role: Role;
 }
 
 export interface IAuthState {
