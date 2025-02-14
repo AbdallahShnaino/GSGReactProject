@@ -2,6 +2,7 @@ export enum InvoiceStatus {
   PAID = "PAID",
   UNPAID = "UNPAID",
 }
+
 export interface IItem {
   id: number;
   name: string;
@@ -10,6 +11,7 @@ export interface IItem {
   discount: number;
   category: string;
 }
+
 export interface Product {
   id: number;
   name: string;
@@ -18,7 +20,8 @@ export interface Product {
   discount: number;
   category: string;
 }
-export interface IInvoice {
+
+export interface Invoice {
   invoiceId: number;
   invoiceNumber: string;
   invoiceIssueDate: string;
@@ -30,11 +33,13 @@ export interface IInvoice {
   invoiceGrandTotal: number;
   invoiceStatus: InvoiceStatus;
 }
+
 export enum Role {
   ADMIN = "ADMIN",
   CLIENT = "CLIENT",
   GUEST = "GUEST",
 }
+
 export interface IUser {
   email: string;
   id: string;

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Search, Calendar, Edit2, Trash2, Download, X } from "lucide-react";
-import { Invoice } from "../../types/invoice";
+import { Invoice, InvoiceStatus } from "../../@types";
 import Logo from "../../assets/WE_GROW.png";
 import "./invoiceListScreen.css";
 import jsPDF from "jspdf";
@@ -14,12 +14,16 @@ interface EditModalProps {
 const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
   const [editedInvoice, setEditedInvoice] = useState<Invoice>(
     invoice || {
-      id: "",
-      invoiceNo: "",
-      clientName: "",
-      totalAmount: 0,
-      paymentStatus: "Unpaid",
-      createdAt: "",
+      invoiceId: 0,
+      invoiceNumber: "",
+      invoiceIssueDate: "",
+      invoiceDueDate: "",
+      invoiceFromBusiness: "",
+      invoiceToClient: "",
+      invoiceSubTotal: 0,
+      invoiceTax: 0,
+      invoiceGrandTotal: 0,
+      invoiceStatus: InvoiceStatus.UNPAID,
     }
   );
 
@@ -40,7 +44,12 @@ const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
     const { id, value } = e.target;
     setEditedInvoice((prev) => ({
       ...prev,
-      [id]: id === "totalAmount" ? parseFloat(value) : value,
+      [id]:
+        id === "invoiceSubTotal" ||
+        id === "invoiceTax" ||
+        id === "invoiceGrandTotal"
+          ? parseFloat(value)
+          : value,
     }));
   };
 
@@ -55,41 +64,41 @@ const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
         </div>
         <form onSubmit={handleSubmit}>
           <div className="form-group">
-            <label htmlFor="invoiceNo">Invoice Number</label>
+            <label htmlFor="invoiceNumber">Invoice Number</label>
             <input
               type="text"
-              id="invoiceNo"
-              value={editedInvoice.invoiceNo}
+              id="invoiceNumber"
+              value={editedInvoice.invoiceNumber}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="clientName">Client Name</label>
+            <label htmlFor="invoiceToClient">Client Name</label>
             <input
               type="text"
-              id="clientName"
-              value={editedInvoice.clientName}
+              id="invoiceToClient"
+              value={editedInvoice.invoiceToClient}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="totalAmount">Total Amount</label>
+            <label htmlFor="invoiceSubTotal">Total Amount</label>
             <input
               type="number"
-              id="totalAmount"
-              value={editedInvoice.totalAmount}
+              id="invoiceSubTotal"
+              value={editedInvoice.invoiceSubTotal}
               onChange={handleChange}
             />
           </div>
           <div className="form-group">
-            <label htmlFor="paymentStatus">Payment Status</label>
+            <label htmlFor="invoiceStatus">Payment Status</label>
             <select
-              id="paymentStatus"
-              value={editedInvoice.paymentStatus}
+              id="invoiceStatus"
+              value={editedInvoice.invoiceStatus}
               onChange={handleChange}
             >
-              <option value="Paid">Paid</option>
-              <option value="Unpaid">Unpaid</option>
+              <option value="PAID">Paid</option>
+              <option value="UNPAID">Unpaid</option>
             </select>
           </div>
           <div className="modal-actions">
@@ -109,44 +118,64 @@ const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
 const InvoiceListScreen: React.FC = () => {
   const [invoices, setInvoices] = useState<Invoice[]>([
     {
-      id: "1",
-      invoiceNo: "INV-001",
-      clientName: "khaseeb",
-      totalAmount: 150.0,
-      paymentStatus: "Paid",
-      createdAt: "2024-03-15",
+      invoiceId: 1,
+      invoiceNumber: "INV-001",
+      invoiceIssueDate: "2024-03-15",
+      invoiceDueDate: "2024-04-15",
+      invoiceFromBusiness: "We Grow",
+      invoiceToClient: "khaseeb",
+      invoiceSubTotal: 150.0,
+      invoiceTax: 15.0,
+      invoiceGrandTotal: 165.0,
+      invoiceStatus: InvoiceStatus.PAID,
     },
     {
-      id: "2",
-      invoiceNo: "INV-002",
-      clientName: "sarry sultan",
-      totalAmount: 200.0,
-      paymentStatus: "Unpaid",
-      createdAt: "2024-03-16",
+      invoiceId: 2,
+      invoiceNumber: "INV-002",
+      invoiceIssueDate: "2024-03-16",
+      invoiceDueDate: "2024-04-16",
+      invoiceFromBusiness: "We Grow",
+      invoiceToClient: "sarry sultan",
+      invoiceSubTotal: 200.0,
+      invoiceTax: 20.0,
+      invoiceGrandTotal: 220.0,
+      invoiceStatus: InvoiceStatus.UNPAID,
     },
     {
-      id: "3",
-      invoiceNo: "INV-003",
-      clientName: "khasati",
-      totalAmount: 500.0,
-      paymentStatus: "Paid",
-      createdAt: "2024-03-17",
+      invoiceId: 3,
+      invoiceNumber: "INV-003",
+      invoiceIssueDate: "2024-03-17",
+      invoiceDueDate: "2024-04-17",
+      invoiceFromBusiness: "We Grow",
+      invoiceToClient: "Amjad Shabaneh",
+      invoiceSubTotal: 250.0,
+      invoiceTax: 20.0,
+      invoiceGrandTotal: 270.0,
+      invoiceStatus: InvoiceStatus.UNPAID,
     },
     {
-      id: "4",
-      invoiceNo: "INV-004",
-      clientName: "abdullah",
-      totalAmount: 750.0,
-      paymentStatus: "Unpaid",
-      createdAt: "2024-03-18",
+      invoiceId: 4,
+      invoiceNumber: "INV-004",
+      invoiceIssueDate: "2024-03-18",
+      invoiceDueDate: "2024-04-18",
+      invoiceFromBusiness: "We Grow",
+      invoiceToClient: "Abdallah",
+      invoiceSubTotal: 300.0,
+      invoiceTax: 20.0,
+      invoiceGrandTotal: 320.0,
+      invoiceStatus: InvoiceStatus.PAID,
     },
     {
-      id: "5",
-      invoiceNo: "INV-005",
-      clientName: "amjad shabneh",
-      totalAmount: 300.0,
-      paymentStatus: "Paid",
-      createdAt: "2024-03-19",
+      invoiceId: 5,
+      invoiceNumber: "INV-005",
+      invoiceIssueDate: "2024-03-20",
+      invoiceDueDate: "2024-04-20",
+      invoiceFromBusiness: "We Grow",
+      invoiceToClient: "Mohammad khasati",
+      invoiceSubTotal: 500.0,
+      invoiceTax: 15.0,
+      invoiceGrandTotal: 515.0,
+      invoiceStatus: InvoiceStatus.UNPAID,
     },
   ]);
 
@@ -167,32 +196,34 @@ const InvoiceListScreen: React.FC = () => {
       const searchTerm = filters.search.trim().toLowerCase();
       result = result.filter(
         (invoice) =>
-          invoice.invoiceNo.toLowerCase().includes(searchTerm) ||
-          invoice.clientName.toLowerCase().includes(searchTerm)
+          invoice.invoiceNumber.toLowerCase().includes(searchTerm) ||
+          invoice.invoiceToClient.toLowerCase().includes(searchTerm)
       );
     }
 
     if (filters.paymentStatus !== "All Payment Status") {
       result = result.filter(
-        (invoice) => invoice.paymentStatus === filters.paymentStatus
+        (invoice) => invoice.invoiceStatus === filters.paymentStatus
       );
     }
 
     if (filters.dateFrom) {
       result = result.filter(
-        (invoice) => invoice.createdAt >= filters.dateFrom
+        (invoice) => invoice.invoiceIssueDate >= filters.dateFrom
       );
     }
 
     if (filters.dateTo) {
-      result = result.filter((invoice) => invoice.createdAt <= filters.dateTo);
+      result = result.filter(
+        (invoice) => invoice.invoiceIssueDate <= filters.dateTo
+      );
     }
 
     setFilteredInvoices(result);
   }, [filters, invoices]);
 
-  const handleDelete = (id: string) => {
-    setInvoices(invoices.filter((invoice) => invoice.id !== id));
+  const handleDelete = (id: number) => {
+    setInvoices(invoices.filter((invoice) => invoice.invoiceId !== id));
   };
 
   const handleEdit = (invoice: Invoice) => {
@@ -202,7 +233,7 @@ const InvoiceListScreen: React.FC = () => {
   const handleSaveEdit = (editedInvoice: Invoice) => {
     setInvoices(
       invoices.map((invoice) =>
-        invoice.id === editedInvoice.id ? editedInvoice : invoice
+        invoice.invoiceId === editedInvoice.invoiceId ? editedInvoice : invoice
       )
     );
     setEditingInvoice(null);
@@ -213,23 +244,23 @@ const InvoiceListScreen: React.FC = () => {
     doc.setFontSize(20);
     doc.text("INVOICE", 105, 20, { align: "center" });
     doc.setFontSize(12);
-    doc.text(`Invoice No: ${invoice.invoiceNo}`, 20, 40);
-    doc.text(`Date: ${invoice.createdAt}`, 20, 50);
+    doc.text(`Invoice No: ${invoice.invoiceNumber}`, 20, 40);
+    doc.text(`Date: ${invoice.invoiceIssueDate}`, 20, 50);
     doc.text("Bill To:", 20, 70);
-    doc.text(invoice.clientName, 20, 80);
+    doc.text(invoice.invoiceToClient, 20, 80);
     doc.setFillColor(240, 240, 240);
     doc.rect(20, 100, 170, 10, "F");
     doc.text("Description", 25, 107);
     doc.text("Amount", 160, 107, { align: "right" });
     doc.text("Total Amount:", 120, 130);
-    doc.text(`$${invoice.totalAmount.toFixed(2)}`, 160, 130, {
+    doc.text(`$${invoice.invoiceSubTotal.toFixed(2)}`, 160, 130, {
       align: "right",
     });
     doc.text("Payment Status:", 120, 140);
-    doc.text(invoice.paymentStatus, 160, 140, { align: "right" });
+    doc.text(invoice.invoiceStatus, 160, 140, { align: "right" });
     doc.setFontSize(10);
     doc.text("Thank you for your business!", 105, 270, { align: "center" });
-    doc.save(`invoice_${invoice.invoiceNo}.pdf`);
+    doc.save(`invoice_${invoice.invoiceNumber}.pdf`);
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -268,8 +299,8 @@ const InvoiceListScreen: React.FC = () => {
           }
         >
           <option>All Payment Status</option>
-          <option>Paid</option>
-          <option>Unpaid</option>
+          <option value="PAID">Paid</option>
+          <option value="UNPAID">Unpaid</option>
         </select>
 
         <div className="date-filter">
@@ -309,15 +340,15 @@ const InvoiceListScreen: React.FC = () => {
           </thead>
           <tbody>
             {filteredInvoices.map((invoice) => (
-              <tr key={invoice.id}>
-                <td>{invoice.invoiceNo}</td>
-                <td>{invoice.clientName}</td>
-                <td>${invoice.totalAmount.toFixed(2)}</td>
+              <tr key={invoice.invoiceId}>
+                <td>{invoice.invoiceNumber}</td>
+                <td>{invoice.invoiceToClient}</td>
+                <td>${invoice.invoiceSubTotal.toFixed(2)}</td>
                 <td>
                   <span
-                    className={`status-badge ${invoice.paymentStatus.toLowerCase()}`}
+                    className={`status-badge ${invoice.invoiceStatus.toLowerCase()}`}
                   >
-                    {invoice.paymentStatus}
+                    {invoice.invoiceStatus}
                   </span>
                 </td>
                 <td className="actions">
@@ -330,7 +361,7 @@ const InvoiceListScreen: React.FC = () => {
                   </button>
                   <button
                     className="action-button delete"
-                    onClick={() => handleDelete(invoice.id)}
+                    onClick={() => handleDelete(invoice.invoiceId)}
                   >
                     <Trash2 size={16} />
                     Delete
