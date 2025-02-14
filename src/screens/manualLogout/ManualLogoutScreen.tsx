@@ -1,6 +1,6 @@
 import { LogOut, Info } from "lucide-react";
-import "./ManualLogoutScreen.css";
 import Logo from ".././../assets/WE_GROW.png";
+import "./ManualLogoutScreen.css";
 
 const ManualLogoutScreen = () => {
   return (
