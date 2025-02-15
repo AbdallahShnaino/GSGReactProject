@@ -6,12 +6,8 @@
   text-transform: capitalize;
 }
 
-.invoice-container .logo {
-  margin-bottom: 70px;
-}
-
 .invoice-header {
-  margin-bottom: 2rem;
+  margin: 3rem 0 2rem;
 }
 
 .invoice-header h1 {

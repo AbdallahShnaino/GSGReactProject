@@ -1,8 +1,11 @@
-import { LogOut, Info } from "lucide-react";
+import { LogOut } from "lucide-react";
 import Logo from ".././../assets/WE_GROW.png";
 import "./ManualLogoutScreen.css";
+import { useContext } from "react";
+import { AuthContext } from "../../providers/auth-provider";
 
 const ManualLogoutScreen = () => {
+  const { logout } = useContext(AuthContext);
   return (
     <div>
       <main className="container">
@@ -16,14 +19,9 @@ const ManualLogoutScreen = () => {
           </p>
 
           <div className="button-group">
-            <button className="button button-logout">
+            <button className="button button-logout" onClick={logout}>
               <LogOut size={20} />
               Logout
-            </button>
-
-            <button className="button button-info">
-              <Info size={20} />
-              Session Info
             </button>
           </div>
         </div>
