@@ -1,6 +1,6 @@
 import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import InvoiceListScreen from "./screens/invoiceList/InvoiceListScreen";
+import AdminScreen from "./screens/AdminScreen/admin.screen";
 import { Role } from "./@types";
 import ClientScreen from "./screens/client.screen";
 import Guarded from "./components/common/guarded-route/guarded-route.component";
@@ -14,7 +14,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomeScreen />} />
         <Route path="/logout" element={<ManualLogoutScreen />} />
-        <Route path="/admin" element={<InvoiceListScreen />} />
+        <Route path="/admin" element={<AdminScreen />} />
         <Route
           path="/client"
           element={
