@@ -20,6 +20,7 @@ export const AuthContext = createContext<IAuthContext>({
 
 export const AuthProvider = (props: { children: React.ReactNode }) => {
   const [user, setUser] = useState<IUser | null>(null);
+
   const { storedData, loading } = useLocalStorage(user, "auth-user");
 
   useLayoutEffect(() => {
@@ -41,6 +42,7 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
 
   const logout = () => {
     setUser(null);
+    localStorage.removeItem("auth-user");
   };
 
   const data = { user, loading, login, logout, storeUser };

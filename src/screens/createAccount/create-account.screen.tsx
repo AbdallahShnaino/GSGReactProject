@@ -1,9 +1,11 @@
-import { useContext, useState } from "react";
+import { useContext, useReducer, useState } from "react";
 import "./create-account.screen.css";
 import { IUser, Role } from "../../@types";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/auth-provider";
 import logo from "./../../assets/WE_GROW.png";
+import { stateReducer } from "../../state/users.reducer";
+import { UsersStateContext } from "../../providers/users-state.provider";
 
 interface IError {
   field: string;
@@ -25,6 +27,7 @@ const CreateAccount = () => {
   const [errorsList, setErrorsList] = useState<IError[]>([]);
   const [loading, setLoading] = useState<Boolean>(false);
   const { storeUser } = useContext(AuthContext);
+  const { dispatch } = useContext(UsersStateContext);
 
   const handleSubmit = () => {
     const newUser: IUser = {
@@ -39,6 +42,7 @@ const CreateAccount = () => {
       setLoading((_) => true);
       setErrorsList([]);
       onSubmit(newUser);
+      dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
         navigate("/client");
       }, 1500);
