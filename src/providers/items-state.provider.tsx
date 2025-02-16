@@ -16,7 +16,7 @@ interface IItemStateContext {
 const INTI_STATE = {
   state: { itemsList: [] },
   loading: true,
-  dispatch: () => {},
+  dispatch: () => { },
 };
 
 export const ItemStateContext = createContext<IItemStateContext>(INTI_STATE);

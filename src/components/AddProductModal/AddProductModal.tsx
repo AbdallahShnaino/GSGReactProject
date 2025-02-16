@@ -17,7 +17,7 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
         price: 0,
         quantity: 0,
         discount: 0,
-        category: categories[0], // تعيين الفئة الافتراضية
+        category: categories[0],
     });
 
     const [confirmationMessage, setConfirmationMessage] = useState<string | null>(null);
@@ -36,9 +36,7 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
 
         onAddProduct(newProduct);
         setConfirmationMessage(product ? "Product updated successfully!" : "Product added successfully!");
-
-        setTimeout(() => setConfirmationMessage(null), 2000); // إخفاء الرسالة بعد ثانيتين
-
+        setTimeout(() => setConfirmationMessage(null), 2000);
         onClose();
     };
 
@@ -75,7 +73,6 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
                     onChange={(e) => setNewProduct({ ...newProduct, discount: parseFloat(e.target.value) })}
                 />
 
-                {/* ✅ اختيار الفئة من قائمة منسدلة */}
                 <select
                     value={newProduct.category}
                     onChange={(e) => setNewProduct({ ...newProduct, category: e.target.value })}
@@ -92,7 +89,6 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
                     </button>
                 </div>
 
-                {/* ✅ إظهار رسالة التأكيد */}
                 {confirmationMessage && <div className="confirmation-message">{confirmationMessage}</div>}
             </div>
         </div>
