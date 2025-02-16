@@ -1,0 +1,127 @@
+.c-header {
+  width: 44%;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  margin: 0 auto;
+}
+
+.create-account {
+  width: 100%;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--deep-teal);
+  background-image: url("./../../assets/rectangle1.png"),
+    url("./../../assets/rectangle2.png");
+  background-position: bottom right, top left;
+  background-repeat: no-repeat, no-repeat;
+  background-size: 35% auto, 35% auto;
+  z-index: 1;
+}
+
+.create-account__form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: var(--mint-white);
+  width: 100%;
+  max-width: 500px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 3.4rem 0;
+}
+.create-account__form div {
+  margin: 0.3rem;
+}
+.welcome > * {
+  padding: 0;
+  margin: 0;
+}
+.create-account__input {
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+  margin: 0.5rem;
+}
+.create-account__input span {
+  padding: 0;
+  margin: 0;
+}
+
+.create-account__input input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 5px;
+  font-size: 16px;
+}
+
+.create-account__error {
+  font-size: 0.8rem;
+  color: red;
+  text-align: start;
+  margin: 0 auto;
+}
+.red-border {
+  border: 1px solid red;
+}
+.normal-border {
+  border: 1px solid var(--light-gray);
+}
+
+.create-account__button {
+  width: 70%;
+  padding: 12px;
+  color: var(--mint-white);
+  background-color: var(--deep-teal);
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  margin: 0.4rem auto;
+}
+
+.create-account__button:hover {
+  color: var(--mint-white);
+}
+.create-account a {
+  color: var(--dark-green);
+}
+span.spinner {
+  border: 8px solid var(--soft-sand);
+  border-top: 8px solid var(--dark-green);
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+  margin: 30px auto;
+  position: absolute;
+  z-index: 11;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+@media (max-width: 700px) {
+  .create-account {
+    background-color: var(--deep-teal);
+    background-image: url("./../../assets/rectangle1.png"),
+      url("./../../assets/rectangle2.png");
+    background-position: bottom right, top left;
+    background-repeat: no-repeat, no-repeat;
+    background-size: 50%;
+    z-index: 1;
+  }
+  .create-account__form {
+    width: 90%;
+  }
+}

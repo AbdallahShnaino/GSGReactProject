@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Search, Calendar, Edit2, Trash2, Download, X } from "lucide-react";
 import Header from "../../components/common/header/header";
-import { IInvoice, InvoiceStatus } from "../../@types";
+import { IInvoice, InvoiceStatus, IItem } from "../../@types";
 import { generatePDF } from "../../utils/helpers";
 import { useSearchParams } from "react-router-dom";
 import "./admin.screen.css";
@@ -25,6 +25,7 @@ const EditModal: React.FC<IProps> = ({ invoice, onClose, onSave }) => {
       invoiceTax: 0,
       invoiceGrandTotal: 0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     }
   );
 
@@ -129,6 +130,7 @@ const AdminScreen: React.FC = () => {
       invoiceTax: 15.0,
       invoiceGrandTotal: 165.0,
       invoiceStatus: InvoiceStatus.PAID,
+      itemsList: [],
     },
     {
       invoiceId: 2,
@@ -141,6 +143,7 @@ const AdminScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 220.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
     {
       invoiceId: 3,
@@ -153,6 +156,7 @@ const AdminScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 270.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
     {
       invoiceId: 4,
@@ -165,6 +169,7 @@ const AdminScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 320.0,
       invoiceStatus: InvoiceStatus.PAID,
+      itemsList: [],
     },
     {
       invoiceId: 5,
@@ -177,6 +182,7 @@ const AdminScreen: React.FC = () => {
       invoiceTax: 15.0,
       invoiceGrandTotal: 515.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
   ]);
 
@@ -242,7 +248,14 @@ const AdminScreen: React.FC = () => {
   };
 
   const handleExport = (invoice: IInvoice) => {
-    generatePDF(invoice);
+    if (
+      Array.isArray(invoice.itemsList) &&
+      invoice.itemsList.every((item) => typeof item !== "string")
+    ) {
+      generatePDF({ itemsList: invoice.itemsList as IItem[] }, invoice);
+    } else {
+      console.error("Invalid itemsList format");
+    }
   };
 
   const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
