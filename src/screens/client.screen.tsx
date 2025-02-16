@@ -1,7 +1,6 @@
 import "./client.screen.css";
 import Header from "../components/common/header/header";
 import InvoiceRow from "../components/invoice-row/invoice-row";
-import Footer from "../components/common/footer/footer";
 import InvoiceFilters from "../components/invoice-fillters/invoice-filters";
 import CountShowSettings from "../components/count-show-settings/count-show-settings";
 import personImage from "./../assets/person.png";
@@ -196,7 +195,7 @@ const ClientScreen = () => {
         </section>
 
         <section className="client__invoices">
-          <h2>My Invoices List</h2>
+          <h3>My Invoices List</h3>
 
           {filtering || loading ? (
             <div className="spinner"></div>
@@ -214,27 +213,24 @@ const ClientScreen = () => {
                   invoiceSubTotal={inv.invoiceSubTotal}
                   invoiceTax={inv.invoiceTax}
                   invoiceToClient="to client"
+                  itemsList={[]}
                 />
               </div>
             ))
           ) : (
-            <h3 className="client__no-results">No results found!</h3>
+            <h4 className="client__no-results">No results found!</h4>
           )}
         </section>
 
         <section className="client__pagination">
           <CountShowSettings
-            currentPage={currentPage}
-            totalPages={totalPages}
+            currentPage={filteredInvoices.length == 0 ? 0 : currentPage}
+            totalPages={filteredInvoices.length == 0 ? 0 : totalPages}
             updateItemsPerPage={updateItemsPerPage}
             onPreClick={onPreClick}
             onNextClick={onNextClick}
           />
         </section>
-
-        <footer className="client__footer">
-          <Footer />
-        </footer>
       </div>
     </>
   );

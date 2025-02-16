@@ -9,11 +9,9 @@
 .invoice-filters__row {
   display: flex;
   align-items: center;
-  margin-top: 1rem;
-}
-.invoice-filters__row h3 {
   margin: 0;
 }
+
 .invoice-filters__element {
   display: flex;
   flex-direction: column;
@@ -45,11 +43,12 @@
   color: var(--gray);
   background-color: transparent;
   border-bottom: 2px solid var(--gray);
+  padding: 0.6rem;
 }
 
 .invoice-filters__dropdown-icon {
-  width: 24px;
-  height: 24px;
+  width: 28px;
+  height: 28px;
 }
 
 .invoice-filters__ranges {

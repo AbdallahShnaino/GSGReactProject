@@ -12,15 +12,6 @@ export interface IItem {
   category: string;
 }
 
-export interface IProduct {
-  id: number;
-  name: string;
-  price: number;
-  quantity: number;
-  discount: number;
-  category: string;
-}
-
 export interface IInvoice {
   invoiceId: number;
   invoiceNumber: string;
@@ -32,6 +23,7 @@ export interface IInvoice {
   invoiceTax: number;
   invoiceGrandTotal: number;
   invoiceStatus: InvoiceStatus;
+  itemsList: string[] | IItem[];
 }
 
 export enum Role {

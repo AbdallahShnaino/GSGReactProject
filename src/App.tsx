@@ -7,6 +7,9 @@ import Guarded from "./components/common/guarded-route/guarded-route.component";
 import NotFound from "./screens/not-found.screen";
 import HomeScreen from "./screens/home.screen";
 import ManualLogoutScreen from "./screens/manualLogout/ManualLogoutScreen";
+import CreateAccount from "./screens/createAccount/create-account.screen";
+import ProductPage from "./screens/ProductPage/ProductPage";
+import CreateInvoiceScreen from "./screens/create-invoice/create-invoice";
 import LoginScreen from "./screens/loginScreen/Login.screen";
 
 function App() {
@@ -14,8 +17,6 @@ function App() {
     <div>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
-        <Route path="/logout" element={<ManualLogoutScreen />} />
-        <Route path="/admin" element={<InvoiceListScreen />} />
         <Route
           path="/client"
           element={
@@ -24,6 +25,34 @@ function App() {
             </Guarded>
           }
         />
+
+        <Route path="/user/create" element={<CreateAccount />} />
+        <Route
+          path="/admin/invoice/create"
+          element={
+            <Guarded roles={[Role.ADMIN]}>
+              <CreateInvoiceScreen />
+            </Guarded>
+          }
+        />
+        <Route
+          path="/admin/invoice"
+          element={
+            <Guarded roles={[Role.ADMIN]}>
+              <InvoiceListScreen />
+            </Guarded>
+          }
+        />
+        <Route
+          path="/admin/product"
+          element={
+            <Guarded roles={[Role.ADMIN]}>
+              <ProductPage />
+            </Guarded>
+          }
+        />
+        <Route path="/logout" element={<ManualLogoutScreen />} />
+
         <Route path="*" element={<NotFound />} />
         <Route path="/login" element={<LoginScreen />} />
       </Routes>

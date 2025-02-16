@@ -1,12 +1,16 @@
 import "./invoice-row.css";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import { IInvoice, InvoiceStatus } from "../../@types";
 import eyeIcon from "../../assets/Eye.png";
 import pdfIcon from "../../assets/pdf.png";
 import { generatePDF } from "../../utils/helpers";
+import { ItemStateContext } from "../../providers/items-state.provider";
+import { InvoicesStateContext } from "../../providers/invoices-state.provider";
 
 const InvoiceRow = (props: IInvoice) => {
   const [showDetails, setShowDetails] = useState(false);
+  const { state } = useContext(ItemStateContext);
+  const invoiceReducer = useContext(InvoicesStateContext);
 
   const invoiceStatusClass =
     props.invoiceStatus === InvoiceStatus.PAID
@@ -32,7 +36,14 @@ const InvoiceRow = (props: IInvoice) => {
           {props.invoiceGrandTotal}$
         </span>
         <span>
-          <button onClick={() => generatePDF(props)}>
+          <button
+            onClick={() => {
+              invoiceReducer.state.invoicesList.find(
+                (inv) =>
+                  inv.invoiceId == props.invoiceId && generatePDF(state, inv)
+              );
+            }}
+          >
             <img src={pdfIcon} alt="pdf Icon" width={24} height={24} />
           </button>
         </span>
@@ -79,7 +90,15 @@ const InvoiceRow = (props: IInvoice) => {
               Grand Total: <span>{props.invoiceGrandTotal}$</span>
             </p>
             <span>
-              <button onClick={() => generatePDF(props)}>
+              <button
+                onClick={() => {
+                  invoiceReducer.state.invoicesList.find(
+                    (inv) =>
+                      inv.invoiceId == props.invoiceId &&
+                      generatePDF(state, inv)
+                  );
+                }}
+              >
                 <img src={pdfIcon} alt="pdf Icon" width={24} height={24} />
               </button>
             </span>

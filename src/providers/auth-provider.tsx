@@ -6,6 +6,7 @@ export interface IAuthContext {
   user: IUser | null;
   loading: boolean;
   login: (data: IUser) => void;
+  storeUser: (data: IUser) => void;
   logout: () => void;
 }
 
@@ -13,6 +14,7 @@ export const AuthContext = createContext<IAuthContext>({
   user: null,
   login: () => {},
   logout: () => {},
+  storeUser: () => {},
   loading: true,
 });
 
@@ -33,12 +35,15 @@ export const AuthProvider = (props: { children: React.ReactNode }) => {
       setUser(null);
     }
   };
+  const storeUser = (data: IUser) => {
+    setUser(data);
+  };
 
   const logout = () => {
     setUser(null);
   };
 
-  const data = { user, loading, login, logout };
+  const data = { user, loading, login, logout, storeUser };
 
   return (
     <AuthContext.Provider value={data}>{props.children}</AuthContext.Provider>

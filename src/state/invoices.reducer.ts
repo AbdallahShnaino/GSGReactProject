@@ -5,6 +5,7 @@ export type State = {
 };
 export type Action =
   | { type: "INIT"; payload: IInvoice[] }
+  | { type: "ADD_INVOICE"; payload: IInvoice }
   | { type: "GET_CLIENT_INVOICES"; payload: string };
 export const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
@@ -12,6 +13,11 @@ export const stateReducer = (state: State, action: Action): State => {
       return {
         ...state,
         invoicesList: action.payload,
+      };
+    case "ADD_INVOICE":
+      return {
+        ...state,
+        invoicesList: [action.payload, ...state.invoicesList],
       };
 
     case "GET_CLIENT_INVOICES":
