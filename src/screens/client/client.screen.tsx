@@ -1,14 +1,14 @@
 import "./client.screen.css";
-import Header from "../components/common/header/header";
-import InvoiceRow from "../components/invoice-row/invoice-row";
-import InvoiceFilters from "../components/invoice-fillters/invoice-filters";
-import CountShowSettings from "../components/count-show-settings/count-show-settings";
-import personImage from "./../assets/person.png";
-import { IInvoice, InvoiceStatus } from "../@types";
+import Header from "../../components/common/header/header";
+import InvoiceRow from "../../components/invoice-row/invoice-row";
+import InvoiceFilters from "../../components/invoice-fillters/invoice-filters";
+import CountShowSettings from "../../components/count-show-settings/count-show-settings";
+import personImage from "../../assets/person.png";
+import { IInvoice, InvoiceStatus } from "../../@types";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
-import { InvoicesStateContext } from "../providers/invoices-state.provider";
-import { AuthContext } from "../providers/auth-provider";
+import { InvoicesStateContext } from "../../providers/invoices-state.provider";
+import { AuthContext } from "../../providers/auth-provider";
 const ClientScreen = () => {
   const [params, setParams] = useSearchParams();
   const { state, loading } = useContext(InvoicesStateContext);
