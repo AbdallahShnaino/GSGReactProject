@@ -3,7 +3,7 @@ import Header from "../../components/common/header/header";
 import InvoiceRow from "../../components/invoice-row/invoice-row";
 import InvoiceFilters from "../../components/invoice-fillters/invoice-filters";
 import CountShowSettings from "../../components/count-show-settings/count-show-settings";
-import personImage from "./../assets/person.png";
+import personImage from "../../assets/person.png";
 import { IInvoice, InvoiceStatus } from "../../@types";
 import { useContext, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
