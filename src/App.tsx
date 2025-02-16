@@ -7,6 +7,7 @@ import Guarded from "./components/common/guarded-route/guarded-route.component";
 import NotFound from "./screens/not-found.screen";
 import HomeScreen from "./screens/home.screen";
 import ManualLogoutScreen from "./screens/manualLogout/ManualLogoutScreen";
+import LoginScreen from "./screens/loginScreen/Login.screen";
 
 function App() {
   return (
@@ -24,6 +25,7 @@ function App() {
           }
         />
         <Route path="*" element={<NotFound />} />
+        <Route path="/login" element={<LoginScreen />} />
       </Routes>
     </div>
   );
