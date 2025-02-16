@@ -19,7 +19,7 @@ const Guarded = (props: IProps) => {
     // User is not logged in
     return (
       <div>
-        <h2>You must be logged in to see this screen!</h2>
+        <h3>You must be logged in to see this screen!</h3>
         <Link to="/login">Login in here</Link>
       </div>
     );

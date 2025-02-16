@@ -23,7 +23,7 @@ const CountShowSettings: React.FC<IProps> = ({
       <div className="count-show-settings__pagination">
         <button
           className="count-show-settings__button"
-          disabled={currentPage === 1}
+          disabled={currentPage === totalPages || currentPage === 1}
           onClick={onPreClick}
         >
           <img src={leftIcon} alt="Previous page" />
