@@ -1,197 +1,146 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent } from "react";
 import RangeSlider from "../common/range-slider/range-slider";
 import counter2arrow from "./../../assets/counter.png";
 import counter1arrow from "./../../assets/ic_arrow_drop_down.png";
 import { useSearchParams } from "react-router-dom";
+import "./invoice-filters.css";
 interface IProps {
   minRange: number;
   maxRange: number;
 }
-const InvoiceFilters = (props: IProps) => {
-  const [selectedIssueDate, setSelectedIssueDate] = useState("");
-  const [selectedDeuDate, setSelectedDeuDate] = useState("");
 
+const InvoiceFilters = (props: IProps) => {
+  const { maxRange, minRange } = props;
   const [params, setParams] = useSearchParams();
-  const handleCompanySearch = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const query = event.target.value;
-    if (query.length) {
-      params.set("company", query);
+
+  const updateQueryParam = (key: string, value: string) => {
+    if (value.length) {
+      params.set(key, value);
     } else {
-      params.delete("company");
+      params.delete(key);
     }
     setParams(params);
   };
-  const handleInvNumberSearch = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const query = event.target.value;
-    if (query.length) {
-      params.set("inv-num", query);
-    } else {
-      params.delete("inv-num");
-    }
-    setParams(params);
-  };
-  const handleInvStatusSearch = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const query = event.target.value;
-    if (query === "all") {
-      params.delete("inv-status");
-    } else {
-      params.set("inv-status", query);
-    }
-    setParams(params);
-  };
-  function handleIssueDateChange(event: ChangeEvent<HTMLInputElement>): void {
-    const query = event.target.value;
-    if (query.length) {
-      params.set("inv-issue-date", query);
-    } else {
-      params.delete("inv-issue-date");
-    }
-    setSelectedIssueDate(query);
-    setParams(params);
-  }
-  function handleDueDateChange(event: ChangeEvent<HTMLInputElement>): void {
-    const query = event.target.value;
-    if (query.length) {
-      params.set("inv-due-date", query);
-    } else {
-      params.delete("inv-due-date");
-    }
-    setSelectedDeuDate(query);
-    setParams(params);
-  }
-  function handleTaxRangeChange(queries: number[]) {
-    if (queries[0] != props.minRange) {
-      params.set("inv-tax-min", queries[0].toString());
-    }
-    if (queries[1] != props.maxRange) {
-      params.set("inv-tax-max", queries[1].toString());
-    }
-    if (queries[1] == props.maxRange) {
-      params.delete("inv-tax-max");
-    }
-    if (queries[0] == props.minRange) {
-      params.delete("inv-tax-min");
-    }
-    setParams(params);
-  }
-  function handleSubtotalRangeChange(queries: number[]) {
-    if (queries[0] != props.minRange) {
-      params.set("inv-subtotal-min", queries[0].toString());
-    }
-    if (queries[1] != props.maxRange) {
-      params.set("inv-subtotal-max", queries[1].toString());
-    }
-    if (queries[1] == props.maxRange) {
-      params.delete("inv-subtotal-max");
-    }
-    if (queries[0] == props.minRange) {
-      params.delete("inv-subtotal-min");
-    }
-    setParams(params);
-  }
-  function handleGrandTotalRangeChange(queries: number[]) {
-    if (queries[0] != props.minRange) {
-      params.set("inv-grandtotal-min", queries[0].toString());
-    }
-    if (queries[1] != props.maxRange) {
-      params.set("inv-grandtotal-max", queries[1].toString());
-    }
-    if (queries[1] == props.maxRange) {
-      params.delete("inv-grandtotal-max");
-    }
-    if (queries[0] == props.minRange) {
-      params.delete("inv-grandtotal-min");
-    }
-    setParams(params);
-  }
+
+  const handleInputChange =
+    (key: string) => (event: ChangeEvent<HTMLInputElement>) => {
+      updateQueryParam(key, event.target.value);
+    };
+
+  const handleSelectChange =
+    (key: string) => (event: ChangeEvent<HTMLSelectElement>) => {
+      updateQueryParam(
+        key,
+        event.target.value === "all" ? "" : event.target.value
+      );
+    };
+
+  const handleRangeChange =
+    (keyMin: string, keyMax: string) => (values: number[]) => {
+      if (values[0] !== minRange) params.set(keyMin, values[0].toString());
+      else params.delete(keyMin);
+
+      if (values[1] !== maxRange) params.set(keyMax, values[1].toString());
+      else params.delete(keyMax);
+
+      setParams(params);
+    };
 
   return (
-    <section className="invoices-filters">
-      <div className="filter-element">
+    <section className="invoice-filters">
+      <div className="invoice-filters__element">
         <h3>Company</h3>
         <input
-          id="text-input"
           type="text"
           placeholder="Search"
-          onChange={handleCompanySearch}
+          value={params.get("company") || ""}
+          onChange={handleInputChange("company")}
         />
       </div>
-      <div className="filter-element">
+      <div className="invoice-filters__element">
         <h3>Invoice Number</h3>
         <input
-          id="text-input"
           type="text"
           placeholder="Invoice Number"
-          onChange={handleInvNumberSearch}
+          value={params.get("inv-num") || ""}
+          onChange={handleInputChange("inv-num")}
         />
       </div>
-      <div className="filter-element">
-        <div className="row">
+      <div className="invoice-filters__element">
+        <div className="invoice-filters__row">
           <h3>Status</h3>
-          <img id="drop-down-arrows" src={counter2arrow} alt="2 arrows" />
+          <img
+            className="invoice-filters__dropdown-icon"
+            src={counter2arrow}
+            alt="Dropdown"
+          />
         </div>
-        <div className="status-select">
-          <select
-            onChange={handleInvStatusSearch}
-            style={{
-              background: `url(${counter1arrow}) no-repeat right 10px center`,
-            }}
-          >
-            <option value="all">All</option>
-            <option value="paid">Paid</option>
-            <option value="unpaid">Unpaid</option>
-          </select>
-        </div>
+        <select
+          className="invoice-filters__select"
+          value={params.get("inv-status") || "all"}
+          onChange={handleSelectChange("inv-status")}
+          style={{
+            background: `url(${counter1arrow}) no-repeat right 10px center`,
+          }}
+        >
+          <option value="all">All</option>
+          <option value="paid">Paid</option>
+          <option value="unpaid">Unpaid</option>
+        </select>
       </div>
-      <div className="filter-element issue-date">
+      <div className="invoice-filters__element">
         <h3>Issue Date</h3>
         <input
           type="date"
-          id="issue-date"
-          name="issue-date"
-          min="2025-01-01"
-          value={selectedIssueDate}
-          onChange={handleIssueDateChange}
+          value={params.get("inv-issue-date") || ""}
+          onChange={handleInputChange("inv-issue-date")}
         />
       </div>
-      <div className="filter-element due-date">
+      <div className="invoice-filters__element">
         <h3>Due Date</h3>
         <input
           type="date"
-          id="due-date"
-          name="due-date"
-          min="2025-01-01"
-          value={selectedDeuDate}
-          onChange={handleDueDateChange}
+          value={params.get("inv-due-date") || ""}
+          onChange={handleInputChange("inv-due-date")}
         />
       </div>
-      <div className="filter-element range">
-        <h3>Tax Range</h3>
-        <RangeSlider
-          min={props.minRange}
-          max={props.maxRange}
-          onChange={handleTaxRangeChange}
-        />
-      </div>
-      <div className="filter-element range">
-        <h3>Subtotal Range</h3>
-        <RangeSlider
-          min={props.minRange}
-          max={props.maxRange}
-          onChange={handleSubtotalRangeChange}
-        />
-      </div>
-      <div className="filter-element range">
-        <h3>Grand Total Range</h3>
-        <RangeSlider
-          min={props.minRange}
-          max={props.maxRange}
-          onChange={handleGrandTotalRangeChange}
-        />
+      <div className="invoice-filters__ranges">
+        <div className="invoice-filters__element">
+          <h3>Tax Range</h3>
+          <RangeSlider
+            min={minRange}
+            max={maxRange}
+            hasParam={!!params.get("inv-tax-max")}
+            paramMin={Number(params.get("inv-tax-min")) || 0}
+            paramMax={Number(params.get("inv-tax-max")) || 0}
+            onChange={handleRangeChange("inv-tax-min", "inv-tax-max")}
+          />
+        </div>
+        <div className="invoice-filters__element">
+          <h3>Subtotal Range</h3>
+          <RangeSlider
+            min={minRange}
+            max={maxRange}
+            hasParam={!!params.get("inv-subtotal-max")}
+            paramMin={Number(params.get("inv-subtotal-min")) || 0}
+            paramMax={Number(params.get("inv-subtotal-max")) || 0}
+            onChange={handleRangeChange("inv-subtotal-min", "inv-subtotal-max")}
+          />
+        </div>
+        <div className="invoice-filters__element">
+          <h3>Grand Total Range</h3>
+          <RangeSlider
+            min={minRange}
+            max={maxRange}
+            hasParam={!!params.get("inv-grandtotal-max")}
+            paramMin={Number(params.get("inv-grandtotal-min")) || 0}
+            paramMax={Number(params.get("inv-grandtotal-max")) || 0}
+            onChange={handleRangeChange(
+              "inv-grandtotal-min",
+              "inv-grandtotal-max"
+            )}
+          />
+        </div>
       </div>
     </section>
   );

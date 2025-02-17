@@ -1,87 +1,111 @@
 import "./invoice-row.css";
-import { useEffect, useState } from "react";
-import eye from "./../../assets/Eye.png";
+import { useContext, useState } from "react";
 import { IInvoice, InvoiceStatus } from "../../@types";
+import eyeIcon from "../../assets/Eye.png";
+import pdfIcon from "../../assets/pdf.png";
+import { generatePDF } from "../../utils/helpers";
+import { ItemStateContext } from "../../providers/items-state.provider";
+import { InvoicesStateContext } from "../../providers/invoices-state.provider";
 
 const InvoiceRow = (props: IInvoice) => {
-  const [showIDetails, setShowIDetails] = useState<boolean>(false);
-  const invoiceStatusColor =
-    props.invoiceStatus == InvoiceStatus.PAID ? "#25563d" : "#db4646";
+  const [showDetails, setShowDetails] = useState(false);
+  const { state } = useContext(ItemStateContext);
+  const invoiceReducer = useContext(InvoicesStateContext);
 
-  const showIonShow = {
-    display: "flex",
-    "align-items": "flex-start",
-    "justify-content": "center",
-  };
-  const showIonHide = {
-    display: "none",
-  };
-  function showInvoiceDetails(
-    _: React.MouseEvent<HTMLButtonElement, MouseEvent>
-  ): void {
-    setShowIDetails((prev) => !prev);
-  }
-  useEffect(() => {
-    console.log("Updated showIDetails:", showIDetails);
-  }, [showIDetails]);
+  const invoiceStatusClass =
+    props.invoiceStatus === InvoiceStatus.PAID
+      ? "invoice-row__status--paid"
+      : "invoice-row__status--unpaid";
+
   return (
-    <section className="invoice-elements">
-      <div className="item">
-        <div className="invoice-element">
-          <span className="company-name">{props.invoiceFromBusiness}</span>
-          <span className="invoice-number">{props.invoiceNumber}</span>
-          <span
-            className={
-              props.invoiceStatus == InvoiceStatus.PAID
-                ? "invoice-status paid"
-                : "invoice-status unpaid"
-            }
+    <>
+      <div className="invoice-row__desktop">
+        <span>{props.invoiceFromBusiness}</span>
+        <span>{props.invoiceNumber}</span>
+        <p>
+          <span className={invoiceStatusClass}>
+            {props.invoiceStatus === InvoiceStatus.PAID ? "Paid" : "Unpaid"}
+          </span>
+        </p>
+
+        <span>{props.invoiceIssueDate}</span>
+        <span>{props.invoiceDueDate}</span>
+        <span>{props.invoiceTax}$</span>
+        <span>{props.invoiceSubTotal}$</span>
+        <span className="invoice-row__grand-total">
+          {props.invoiceGrandTotal}$
+        </span>
+        <span>
+          <button
+            onClick={() => {
+              invoiceReducer.state.invoicesList.find(
+                (inv) =>
+                  inv.invoiceId == props.invoiceId && generatePDF(state, inv)
+              );
+            }}
           >
-            {props.invoiceStatus}
-          </span>
-          <span className="invoice-issue-date">{props.invoiceIssueDate}</span>
-          <span className="invoice-due-date">{props.invoiceDueDate}</span>
-          <span className="invoice-tax">{props.invoiceTax.toString()}$</span>
-          <span className="invoice-subtotal">
-            {props.invoiceSubTotal.toString()}$
-          </span>
-          <span className="invoice-grand-total">
-            {props.invoiceGrandTotal.toString()}$
-          </span>
-          <button className="invoice-more-btn" onClick={showInvoiceDetails}>
-            <img src={eye} alt="more button" />
+            <img src={pdfIcon} alt="pdf Icon" width={24} height={24} />
+          </button>
+        </span>
+      </div>
+
+      <div className="invoice-row__mobile-tablet">
+        <div className="invoice-row__mobile-header">
+          <div>
+            <p className="invoice-row__business-name">
+              From: {props.invoiceFromBusiness}
+            </p>
+            <p className="invoice-row__business-grand-total">
+              Grand Total: {props.invoiceGrandTotal}$
+            </p>
+            <p>
+              <span className={invoiceStatusClass}>
+                {props.invoiceStatus === InvoiceStatus.PAID ? "Paid" : "Unpaid"}
+              </span>
+            </p>
+          </div>
+          <button onClick={() => setShowDetails(!showDetails)}>
+            <img src={eyeIcon} alt="More" className="invoice-row__eye-icon" />
           </button>
         </div>
-        <div
-          style={showIDetails ? showIonShow : showIonHide}
-          className="more-data"
-        >
-          <div>
-            <span className="title">Invoice Number </span>
-            <span>{props.invoiceNumber}</span>
-          </div>
-          <div>
-            <span className="title">Invoice Status </span>
+        {showDetails && (
+          <div className="invoice-row__details">
+            <p>
+              Invoice Number: <span>{props.invoiceNumber}</span>
+            </p>
+            <p>
+              Issue Date: <span>{props.invoiceIssueDate}</span>
+            </p>
+            <p>
+              Due Date: <span>{props.invoiceDueDate}</span>
+            </p>
+            <p>
+              Tax: <span>{props.invoiceTax}$</span>
+            </p>
+            <p>
+              Subtotal: <span>{props.invoiceSubTotal}$</span>
+            </p>
 
-            <span className="data" style={{ color: invoiceStatusColor }}>
-              {props.invoiceStatus == InvoiceStatus.PAID ? "Paid" : "Unpaid"}
+            <p className="invoice-row__grand-total">
+              Grand Total: <span>{props.invoiceGrandTotal}$</span>
+            </p>
+            <span>
+              <button
+                onClick={() => {
+                  invoiceReducer.state.invoicesList.find(
+                    (inv) =>
+                      inv.invoiceId == props.invoiceId &&
+                      generatePDF(state, inv)
+                  );
+                }}
+              >
+                <img src={pdfIcon} alt="pdf Icon" width={24} height={24} />
+              </button>
             </span>
           </div>
-          <div>
-            <span className="title">Taxes </span>
-            <span className="data">{props.invoiceTax}$</span>
-          </div>
-          <div>
-            <span className="title">Invoice Subtotal </span>
-            <span className="data">{props.invoiceSubTotal}$</span>
-          </div>
-          <div>
-            <span className="title">Invoice Grand Total </span>
-            <span className="data">{props.invoiceGrandTotal}$</span>
-          </div>
-        </div>
+        )}
       </div>
-    </section>
+    </>
   );
 };
 

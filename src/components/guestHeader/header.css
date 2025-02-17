@@ -1,0 +1,36 @@
+.guest-header{
+    display: flex;
+    padding: 20px;
+    justify-content: space-between;
+    width: 100%;
+    .Logo{
+        padding: 20;
+        img{
+            width: 70px;
+            height: 40px;
+        }
+    }
+    ul.nav-list{
+        list-style: none;
+        display: flex;
+        gap: 30px;
+        font-family: sans-serif;
+       .nav-item.selected{
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 50px;
+        background: #42A570;
+        color: #fff;
+       }
+       .nav-item{
+        width: 100px;
+        height: 40px;
+        text-align: center;
+        line-height: 40px;
+        border-radius: 50px;
+        background-color: #EFE3C2;
+        color:#25563D;
+       }
+    }
+}

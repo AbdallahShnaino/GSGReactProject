@@ -1,17 +1,30 @@
 import "./header.css";
 import logo from "./../../../assets/WE_GROW.png";
-import logout from "./../../../assets/log-out.png";
+import logoutIcon from "./../../../assets/log-out.png";
+import { useContext } from "react";
+import { AuthContext } from "../../../providers/auth-provider";
+import { useNavigate } from "react-router-dom";
+
 const Header = () => {
+  const { logout } = useContext(AuthContext);
+  const navigate = useNavigate();
+
+  const onLogoutClick = () => {
+    logout();
+    navigate("/login");
+  };
   return (
-    <nav className="client-nav">
-      <ul>
-        <li>
-          <img id="logo" src={logo} alt="logo" />
+    <nav className="header">
+      <ul className="header__nav">
+        <li className="header__nav-item">
+          <img className="header__logo" src={logo} alt="logo" />
         </li>
-        <li>Logout</li>
+        <li className="header__logout-text" onClick={onLogoutClick}>
+          Logout
+        </li>
       </ul>
-      <button id="logout-btn">
-        <img src={logout} alt="log out" />
+      <button className="header__logout-btn" onClick={onLogoutClick}>
+        <img src={logoutIcon} alt="log out" />
       </button>
     </nav>
   );

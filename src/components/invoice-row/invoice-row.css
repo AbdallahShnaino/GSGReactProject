@@ -1,252 +1,107 @@
-.invoices-list {
-  justify-items: center;
-  width: 100%;
-  font-size: 14px;
+/* Base styles for Invoice Row */
+.invoice-row__desktop {
+  display: grid;
+  grid-template-columns: repeat(9, 1fr);
+  gap: 10px;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
 }
-.invoice-elements {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-start;
-  align-items: center;
-}
-.invoice-element {
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-start;
-  align-items: center;
-  width: 100%;
-  gap: 4rem;
-}
-.invoice-element span:not(.invoice-status) {
-  margin: 2rem 1rem;
-  border-bottom: 1px solid var(--light-gray);
-}
-.invoice-element button {
+
+.invoice-row__desktop button,
+.invoice-row__details button {
   background-color: transparent;
   border: none;
+  border-bottom: 1px solid #ddd;
 }
-.invoice-element button:hover {
+.invoice-row__desktop button:hover {
   cursor: pointer;
 }
 
-.more-data {
-  font-size: 14px;
+.invoice-row__mobile-tablet {
+  display: none;
+  flex-direction: column;
+  padding: 10px;
+  border-bottom: 1px solid #ddd;
+}
+
+.invoice-row__mobile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.invoice-row__status--paid {
+  padding: 0.1rem;
+  color: var(--light-sea-green);
+  border: 1px solid var(--light-sea-green);
+}
+
+.invoice-row__status--unpaid {
+  padding: 0.1rem;
+  color: var(--burnt-red);
+  border: 1px solid var(--burnt-red);
+}
+
+.invoice-row__eye-icon {
+  width: 28px;
+  height: 28px;
+  cursor: pointer;
+}
+
+.invoice-row__details {
   width: 90%;
-  height: 120px;
   margin: 0.5rem auto;
   padding: 0.2rem 1rem;
   background-color: var(--mint-green);
   color: var(--dark-green);
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
   border-radius: 16px;
 }
-.more-data div span:last-child {
-  color: var(--warm-orange);
+.invoice-row__details > * {
+  margin: 0;
 }
-.paid {
-  padding: 0.1rem;
-  color: var(--light-sea-green);
-  border: 1px solid var(--light-sea-green);
-}
-.unpaid {
-  padding: 0.1rem;
-  color: var(--burnt-red);
-  border: 1px solid var(--burnt-red);
-}
-.invoice-status {
-  text-transform: capitalize;
-}
-.more-data .title {
-  color: var(--dark-green);
+
+.invoice-row__grand-total {
   font-weight: bold;
 }
 
-@media (max-width: 1400px) {
-  .filter-element h3 {
-    font-size: 16px;
-  }
-  .col-2 p:last-child {
-    width: 100%;
-  }
-  .invoice-number {
-    display: inline-block;
-  }
-  .invoice-status {
-    display: inline-block;
-  }
-  .invoice-tax {
-    display: inline-block;
-  }
-  .invoice-subtotal {
-    display: inline-block;
-  }
-  .invoice-grand-total {
-    display: inline-block;
-  }
-
-  a .invoice-element {
-    gap: 0.5rem;
-    font-size: 12px;
-  }
-  .invoice-element {
-    gap: 0.4rem;
-  }
-  .invoice-number {
-    display: none;
-  }
+.invoice-row__business-name {
+  font-size: 14px;
+  font-weight: bold;
 }
 
-@media (max-width: 900px) {
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 10px;
-  }
-  .invoice-number {
-    display: none;
-  }
+.invoice-row__business-grand-total {
+  font-size: 14px;
+  font-weight: bold;
 }
 
-@media (max-width: 800px) {
-  .invoice-more-btn {
-    display: inline-block;
-  }
-  .col-2 p:last-child {
-    width: 50%;
-  }
-
-  .filter-element h3 {
-    font-size: 14px;
-  }
-
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-    gap: 0.1rem;
-  }
-  .item {
-    width: 100%;
-  }
-  .invoice-more-btn {
-    display: none;
-  }
-}
-
-@media (max-width: 550px) {
-  .invoice-more-btn {
-    display: inline-block;
-  }
-  .invoice-number {
-    display: none;
-  }
-  .invoice-status {
-    display: none;
-  }
-  .invoice-tax {
-    display: none;
-  }
-  .invoice-subtotal {
-    display: none;
-  }
-  .invoice-grand-total {
+@media (max-width: 1024px) {
+  /* Mobile and Tablet*/
+  .invoice-row__desktop {
     display: none;
   }
 
-  .invoices-filters {
-    display: flex;
-    flex-direction: column;
-  }
-  .invoices-filters input,
-  .invoices-filters select {
-    width: 100%;
-  }
-  .client-info {
-    display: flex;
-    flex-direction: column;
-  }
-  .client-info .col-1 {
-    padding: 1rem 0;
-  }
-  .client-info .col-2 {
-    padding: 1rem 0;
-  }
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-    gap: 0.2rem;
-  }
-  footer div {
-    flex-direction: column;
-    gap: 0;
-  }
-  footer div:last-child {
-    gap: 0;
-  }
-  footer {
-    flex-direction: column;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-  }
-  footer p {
-    text-align: center;
-  }
-}
-@media (max-width: 340px) {
-  .client-nav ul > li:last-child {
-    display: none;
-  }
-  #logout {
-    width: 48px;
-    height: 48px;
-    display: inline-block;
-  }
-  footer div {
-    flex-direction: column;
-    gap: 0;
-  }
-  footer div:last-child {
-    gap: 0;
-  }
-  footer {
-    flex-direction: column;
-    font-size: 12px;
-    justify-content: center;
-    align-items: center;
-  }
-  footer p {
-    text-align: center;
-  }
-  .invoice-element {
-    gap: 0.2rem;
-  }
-  .show-settings {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    font-size: 12px;
-  }
-  .show-settings button {
-    width: 24px;
-    width: 24px;
-    border: 1px solid var(--gray);
-    border-radius: 8px;
-    font-size: 6px;
-    background: transparent;
-  }
-  .show-settings button img {
-    width: 16px;
-    width: 16px;
-  }
-  .invoice-element {
-    justify-content: flex-start;
-    font-size: 12px;
-  }
-  .show-settings {
-    margin: 1rem 0;
+  .invoice-row__mobile-tablet {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
+  }
+
+  .invoice-row__mobile-header {
+    flex-direction: row;
+    align-items: flex-end;
+    justify-content: center;
+  }
+  .invoice-row__mobile-header div {
+    margin-bottom: 0;
+    text-align: start;
+  }
+  .invoice-row__mobile-header button {
+    background-color: transparent;
+    border: none;
+    margin: 0.7rem 0;
   }
 }

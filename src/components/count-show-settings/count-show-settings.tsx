@@ -1,7 +1,7 @@
 import "./count-show-settings.css";
 import leftIcon from "./../../assets/icons8-back_filled.png";
 import rightIcon from "./../../assets/icons8-right.png";
-import counter1arrow from "./../../assets/ic_arrow_drop_down.png";
+import counterArrow from "./../../assets/ic_arrow_drop_down.png";
 
 interface IProps {
   currentPage: number;
@@ -10,34 +10,42 @@ interface IProps {
   onPreClick(): void;
   onNextClick(): void;
 }
-const CountShowSettings = (props: IProps) => {
+
+const CountShowSettings: React.FC<IProps> = ({
+  currentPage,
+  totalPages,
+  updateItemsPerPage,
+  onPreClick,
+  onNextClick,
+}) => {
   return (
-    <section className="show-settings">
-      <div>
-        <button disabled={props.currentPage == 1}>
-          <img
-            src={leftIcon}
-            alt="icon arrow left"
-            onClick={props.onPreClick}
-          />
+    <section className="count-show-settings">
+      <div className="count-show-settings__pagination">
+        <button
+          className="count-show-settings__button"
+          disabled={currentPage === totalPages || currentPage === 1}
+          onClick={onPreClick}
+        >
+          <img src={leftIcon} alt="Previous page" />
         </button>
-        <span>
-          {props.currentPage} / {props.totalPages}
+        <span className="count-show-settings__page-info">
+          {currentPage} / {totalPages}
         </span>
-        <button disabled={props.currentPage == props.totalPages}>
-          <img
-            src={rightIcon}
-            alt="icon arrow right"
-            onClick={props.onNextClick}
-          />
+        <button
+          className="count-show-settings__button"
+          disabled={currentPage === totalPages}
+          onClick={onNextClick}
+        >
+          <img src={rightIcon} alt="Next page" />
         </button>
       </div>
-      <div>
-        <span>Rows per page</span>
+      <div className="count-show-settings__rows">
+        <span className="count-show-settings__label">Rows per page</span>
         <select
-          onChange={props.updateItemsPerPage}
+          className="count-show-settings__select"
+          onChange={updateItemsPerPage}
           style={{
-            background: `url(${counter1arrow}) no-repeat right 10px center`,
+            background: `url(${counterArrow}) no-repeat right 10px center`,
           }}
         >
           <option value="5">5</option>
