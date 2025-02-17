@@ -36,11 +36,21 @@ const LoginScreen = () => {
       setLoading((_) => true);
       setErrorsList([]);
       storeUser(state.currentUser!);
+    
       setTimeout(() => {
-        navigate("/client");
+        if(state.currentUser?.role === Role.CLIENT){
+          console.log("Navigating to client dashboard");
+          navigate("/client");
+        }else if(state.currentUser?.role === Role.ADMIN){
+          console.log("Navigating to admin dashboard");
+          navigate("/admin/invoice/create");
+        } else {
+          console.error("Unknown user role");
+        }
       }, 1500);
     }
   };
+
 
   const handleChange = (field: string, value: any) => {
     setUser({ ...user!, [field]: value });
@@ -52,7 +62,11 @@ const LoginScreen = () => {
       payload: user!.email,
     });
 
+    console.log("Validating user:", user);
+    console.log("Current state user:", state.currentUser);
+
     const errors: IError[] = [];
+
 
     if (!user || !state.currentUser) {
       errors.push({
