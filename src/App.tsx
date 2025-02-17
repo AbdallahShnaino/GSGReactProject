@@ -11,6 +11,7 @@ import CreateAccount from "./screens/createAccount/create-account.screen";
 import ProductPage from "./screens/ProductPage/ProductPage";
 import CreateInvoiceScreen from "./screens/create-invoice/create-invoice";
 import Products from "./screens/ProductsGuest/products";
+import LoginScreen from "./screens/login/login.screen";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         />
         <Route path="/login" element={<LoginScreen />} />
         <Route path="/logout" element={<ManualLogoutScreen />} />
+        <Route path="/products" element={<Products/>} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>
