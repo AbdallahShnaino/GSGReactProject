@@ -3,6 +3,7 @@ import Footer from "../../components/common/footer/footer";
 import ProductFilters from "../../components/Product-fillters/Product-fillters";
 import ProductList from "../../components/ProductList/ProductList";
 import "./productPage.css"
+import { Link } from "react-router-dom";
 
 function ProductPage() {
     const minPrice = 0;
@@ -13,6 +14,7 @@ function ProductPage() {
     return (
         <div>
             <Header />
+            <Link to={"/admin/invoice/create"}>Create Invoice</Link>
             <h2 className="title">Product List</h2>
             <ProductFilters
                 minPrice={minPrice}
