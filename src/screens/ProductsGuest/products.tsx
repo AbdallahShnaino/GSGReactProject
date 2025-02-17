@@ -1,8 +1,8 @@
 import GuestHeader from "../../components/guestHeader/guestHeader";
 import ItemCard from "../../components/ItemCard/ItemCard";
 import RangeSlider from "../../components/common/range-slider/range-slider";
-import { useState, useEffect } from "react";
-
+import { useState, useEffect,useContext } from "react";
+import { ItemStateContext } from "../../providers/items-state.provider";
 import {  useSearchParams } from "react-router-dom";
 import "./products.css";
 const Products = () => {
@@ -25,10 +25,10 @@ const Products = () => {
     setName(name);
   };
 
+  const {state} = useContext(ItemStateContext);
+  
 
-
-
-  const [filteredItems, setFilteredItems] = useState(sampleItems);
+  const [filteredItems, setFilteredItems] = useState(state.itemsList);
 
   useEffect(() => {
     const searchName = params.get('name')?.toLowerCase() || '';
@@ -36,7 +36,7 @@ const Products = () => {
     const minPrice = Number(params.get('minPrice')) || min;
     const maxPrice = Number(params.get('maxPrice')) || max;
 
-    const filtered = sampleItems.filter(item => {
+    const filtered = state.itemsList.filter(item => {
       const matchesName = item.name.toLowerCase().includes(searchName);
       const matchesCategory = searchCategory ? item.category === searchCategory : true;
       const matchesPrice = item.price >= minPrice && item.price <= maxPrice;
