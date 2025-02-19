@@ -13,6 +13,7 @@ import CreateInvoiceScreen from "./screens/create-invoice/create-invoice";
 import Products from "./screens/ProductsGuest/products";
 import LoginScreen from "./screens/login/login.screen";
 
+
 function App() {
   return (
     <div>
@@ -53,7 +54,7 @@ function App() {
             </Guarded>
           }
         />
-        <Route path="/login" element={<LoginScreen />} />
+        <Route path="/login" element={<LoginScreen/>} />
         <Route path="/logout" element={<ManualLogoutScreen />} />
         <Route path="/products" element={<Products/>} />
 
