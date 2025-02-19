@@ -11,7 +11,7 @@ interface Props {
 const categories = ["Electronics", "Clothing", "Home Appliances", "Books", "Toys"];
 
 const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) => {
-    const [newProduct, setNewProduct] = useState<Product>({
+    const [newProduct, setNewProduct] = useState<IItem>({
         id: Date.now(),
         name: "",
         price: 0,
@@ -96,10 +96,7 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
 
     setTimeout(() => setConfirmationMessage(null), 2000); // إخفاء الرسالة بعد ثانيتين
 
-    onClose();
-  };
-
-  return (
+    onClose();  return (
     <div className="modal-overlay">
       <div className="modal">
         <h2>{product ? "Edit Product" : "Quick Add Product"}</h2>
@@ -174,5 +171,8 @@ const AddProductModal: React.FC<Props> = ({ product, onAddProduct, onClose }) =>
     </div>
   );
 };
+  
+
+
 
 export default AddProductModal;

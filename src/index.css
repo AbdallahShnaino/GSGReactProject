@@ -1,120 +1,22 @@
+@font-face {
+  font-family: 'poppins';
+  src: url("./assets/Fonts/Poppins/Poppins-Regular.ttf");
+}
 *,
 *::before,
 *::after {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
-  font-family: sans-serif;
+  font-family: poppins;
 }
 
 html,
 body {
   height: 100%;
-  font-family: var(--oxygen-font), var(--open-sans-font) sans-serif;
-  line-height: 1.6;
+  font-family: poppins, sans-serif;
   background-color: #fff;
-  margin: 0.4rem;
 }
 
-.container {
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 0 1rem;
-}
 
-section,
-article,
-div {
-  margin-bottom: 2rem;
-}
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin: 1rem 0;
-}
-
-p {
-  margin-bottom: 1.2rem;
-}
-
-.container {
-  padding: 2rem 1rem;
-}
-
-body {
-  font-size: 1rem;
-  color: var(--black);
-}
-
-h1 {
-  font-size: 2.5rem;
-  margin-bottom: 1rem;
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 0.8rem;
-}
-
-h3 {
-  font-size: 1.75rem;
-  margin-bottom: 0.6rem;
-}
-
-h4 {
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
-}
-
-h5 {
-  font-size: 1.25rem;
-  margin-bottom: 0.4rem;
-}
-
-h6 {
-  font-size: 1rem;
-  margin-bottom: 0.3rem;
-}
-
-@media (max-width: 768px) {
-  body {
-    font-size: 0.875rem;
-  }
-
-  h1 {
-    font-size: 2.2rem;
-  }
-
-  h2 {
-    font-size: 1.8rem;
-  }
-
-  h3 {
-    font-size: 1.2rem;
-  }
-
-  h4 {
-    font-size: 0.8rem;
-  }
-
-  .container {
-    padding: 1rem;
-  }
-
-  .card {
-    padding: 1rem;
-  }
-
-  h1 {
-    font-size: 2rem;
-  }
-
-  p {
-    font-size: 0.9rem;
-  }
-}
