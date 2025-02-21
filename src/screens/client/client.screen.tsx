@@ -212,8 +212,8 @@ const ClientScreen = () => {
                   invoiceStatus={inv.invoiceStatus}
                   invoiceSubTotal={inv.invoiceSubTotal}
                   invoiceTax={inv.invoiceTax}
-                  invoiceToClient="to client"
-                  itemsList={[]}
+                  invoiceToClient={inv.invoiceToClient}
+                  itemsList={inv.itemsList}
                 />
               </div>
             ))

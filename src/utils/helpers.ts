@@ -1,6 +1,5 @@
 import { jsPDF } from "jspdf";
 import { IInvoice, IItem } from "../@types";
-import { State } from "../state/items.reducer";
 
 export const formateDate = (textDate: string) => {
   const date = new Date(textDate);
@@ -12,7 +11,7 @@ export const formateDate = (textDate: string) => {
     })
     .replace(",", "");
 };
-export const generatePDF = (state: State, invoice: IInvoice) => {
+export const generatePDF = (invoice: IInvoice) => {
   const doc = new jsPDF();
   let yPosition = 20;
   doc.setFont("helvetica", "bold");
@@ -55,25 +54,26 @@ export const generatePDF = (state: State, invoice: IInvoice) => {
   doc.setFontSize(12);
   doc.setFont("helvetica", "bold");
   doc.text("Item", 14, yPosition);
-  doc.text("Price", 150, yPosition);
+  doc.text("Price of 1", 80, yPosition);
+  doc.text("Quantity", 120, yPosition);
+  doc.text("Total", 140, yPosition);
   doc.text("Discount (%)", 180, yPosition);
 
   invoice.itemsList.forEach((item) => {
     const itemInInvoice = item as IItem;
 
-    state.itemsList.forEach((itemInStorage) => {
-      console.log(itemInInvoice.id);
-      console.log(itemInInvoice.id);
-
-      if (itemInInvoice.id == itemInStorage.id) {
-        yPosition += 10;
-        doc.setFontSize(12);
-        doc.setFont("helvetica", "bold");
-        doc.text(itemInStorage.name, 14, yPosition);
-        doc.text(itemInStorage.price.toString(), 150, yPosition);
-        doc.text(itemInStorage.discount.toString(), 180, yPosition);
-      }
-    });
+    yPosition += 10;
+    doc.setFontSize(12);
+    doc.setFont("helvetica", "bold");
+    doc.text(itemInInvoice.name, 14, yPosition);
+    doc.text(itemInInvoice.price.toString(), 80, yPosition);
+    doc.text(itemInInvoice.quantity.toString(), 120, yPosition);
+    doc.text(
+      (itemInInvoice.price * itemInInvoice.quantity).toString(),
+      140,
+      yPosition
+    );
+    doc.text(itemInInvoice.discount.toString(), 180, yPosition);
   });
 
   yPosition += 10;
