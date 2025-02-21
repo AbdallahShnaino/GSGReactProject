@@ -29,6 +29,7 @@ const CreateAccount = () => {
   const { dispatch } = useContext(UsersStateContext);
 
   const handleSubmit = () => {
+  
     const newUser: IUser = {
       ...user!,
       id: `CLI-2025${Math.trunc(Math.random() * 1000000000)}`,
@@ -43,9 +44,17 @@ const CreateAccount = () => {
       onSubmit(newUser);
       dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
+<<<<<<< HEAD
         user.role == Role.CLIENT
           ? navigate("/client")
           : navigate("/admin/invoice");
+=======
+        if(user.role===Role.ADMIN){
+          navigate("/admin/invoice/create");
+        }else if(user.role===Role.CLIENT) {
+          navigate("/client")
+        }
+>>>>>>> master
       }, 1500);
     }
   };
@@ -130,7 +139,7 @@ const CreateAccount = () => {
               }
               id="name"
               type="text"
-              placeholder="Client Name"
+              placeholder="User Name"
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
@@ -209,7 +218,10 @@ const CreateAccount = () => {
               onChange={(e) => handleChange("password", e.target.value)}
             />
           </div>
-
+              <select onChange={ (e)=>{handleChange('role',e.target.value)}} className="role-select" name="Role" id="Role">
+                <option value={Role.CLIENT} className="">{Role.CLIENT}</option>
+                <option value={Role.ADMIN} className="">{Role.ADMIN}</option>
+              </select>
           <button className="create-account__button" onClick={handleSubmit}>
             Create New Account
           </button>

@@ -3,9 +3,9 @@ import { useSearchParams } from "react-router-dom";
 import { ItemStateContext } from "../../providers/items-state.provider";
 import AddProductModal from "../AddProductModal/AddProductModal";
 import { IItem } from "../../@types";
-import { FiMoreVertical } from "react-icons/fi";
+import { BiDotsHorizontalRounded } from "react-icons/bi";
 import CountShowSettings from "../../components/count-show-settings/count-show-settings";
-import eye from "./../../assets/Eye.png";
+import { CgCloseR } from "react-icons/cg";
 import "./productList.css";
 
 const ProductList: React.FC = () => {
@@ -113,7 +113,7 @@ const ProductList: React.FC = () => {
                                     <td>{product.category}</td>
                                     <td className="action-cell">
                                         <div className="dropdown-container">
-                                            <FiMoreVertical className="more-icon" onClick={() => toggleDropdown(product.id)} />
+                                            <BiDotsHorizontalRounded className="more-icon" onClick={() => toggleDropdown(product.id)} />
                                             {openDropdownId === product.id && (
                                                 <div className="dropdown-menu">
                                                     <button onClick={() => { setSelectedProduct(product); setModalOpen(true); }}>Edit</button>
@@ -131,6 +131,7 @@ const ProductList: React.FC = () => {
                                     <tr className="product-details-row show">
                                         <td colSpan={8}>
                                             <div className="product-details">
+                                                <CgCloseR className="close-icon" onClick={() => setShowDetailsId(null)} />
                                                 <p><strong>Product ID:</strong> {product.id}</p>
                                                 <p><strong>Name:</strong> {product.name}</p>
                                                 <p><strong>Price:</strong> ${product.price}</p>

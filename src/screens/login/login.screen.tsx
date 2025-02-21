@@ -1,10 +1,9 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./login.screen.css";
-import { useContext, useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import { IUser, Role } from "../../@types";
 import { AuthContext } from "../../providers/auth-provider";
 import logo from "./../../assets/WE_GROW.png";
-import { stateReducer } from "../../state/users.reducer";
 import { UsersStateContext } from "../../providers/users-state.provider";
 interface IError {
   field: string;
@@ -36,10 +35,17 @@ const LoginScreen = () => {
       setLoading((_) => true);
       setErrorsList([]);
       storeUser(state.currentUser!);
+
       setTimeout(() => {
-        state.currentUser!.role == Role.CLIENT
-          ? navigate("/client")
-          : navigate("/admin/invoice");
+        if (state.currentUser?.role === Role.CLIENT) {
+          console.log("Navigating to client dashboard");
+          navigate("/client");
+        } else if (state.currentUser?.role === Role.ADMIN) {
+          console.log("Navigating to admin dashboard");
+          navigate("/admin/invoice/create");
+        } else {
+          console.error("Unknown user role");
+        }
       }, 1500);
     }
   };
@@ -53,6 +59,9 @@ const LoginScreen = () => {
       type: "GET_USER_WITH_EMAIL",
       payload: user!.email,
     });
+
+    console.log("Validating user:", user);
+    console.log("Current state user:", state.currentUser);
 
     const errors: IError[] = [];
 

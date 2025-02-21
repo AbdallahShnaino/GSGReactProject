@@ -5,8 +5,10 @@ export type State = {
 };
 export type Action =
   | { type: "INIT"; payload: IInvoice[] }
-  | { type: "ADD_INVOICE"; payload: IInvoice }
-  | { type: "GET_CLIENT_INVOICES"; payload: string };
+  | { type: "GET_CLIENT_INVOICES"; payload: string }
+  | { type: "GET_ALL_INVOICES" }
+  | { type: "ADD_INVOICE"; payload: IInvoice };
+
 export const stateReducer = (state: State, action: Action): State => {
   switch (action.type) {
     case "INIT":
@@ -24,8 +26,14 @@ export const stateReducer = (state: State, action: Action): State => {
       return {
         ...state,
         invoicesList: state.invoicesList.filter(
-          (invoice) => invoice.invoiceToClient == action.payload
+          (invoice) => invoice.invoiceToClient === action.payload
         ),
+      };
+
+    case "GET_ALL_INVOICES":
+      return {
+        ...state,
+        invoicesList: state.invoicesList,
       };
 
     default:
