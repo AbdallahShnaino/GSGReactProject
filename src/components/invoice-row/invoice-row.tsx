@@ -39,8 +39,7 @@ const InvoiceRow = (props: IInvoice) => {
           <button
             onClick={() => {
               invoiceReducer.state.invoicesList.find(
-                (inv) =>
-                  inv.invoiceId == props.invoiceId && generatePDF(state, inv)
+                (inv) => inv.invoiceId == props.invoiceId && generatePDF(inv)
               );
             }}
           >
@@ -94,8 +93,7 @@ const InvoiceRow = (props: IInvoice) => {
                 onClick={() => {
                   invoiceReducer.state.invoicesList.find(
                     (inv) =>
-                      inv.invoiceId == props.invoiceId &&
-                      generatePDF(state, inv)
+                      inv.invoiceId == props.invoiceId && generatePDF(inv)
                   );
                 }}
               >
