@@ -3,7 +3,6 @@ import { IInvoice, IItem } from "../../../@types";
 import "./preview-invoice.css";
 import { InvoicesStateContext } from "../../../providers/invoices-state.provider";
 import { generatePDF } from "../../../utils/helpers";
-import { ItemStateContext } from "../../../providers/items-state.provider";
 
 interface IProps {
   invoice: IInvoice;
@@ -11,7 +10,6 @@ interface IProps {
 
 const PreviewInvoice = ({ invoice }: IProps) => {
   const { dispatch } = useContext(InvoicesStateContext);
-  const items = useContext(ItemStateContext);
   const [loading, setLoading] = useState<boolean>(false);
 
   const handleSubmit = () => {

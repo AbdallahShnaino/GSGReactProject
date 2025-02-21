@@ -1,10 +1,11 @@
 import { Link, useNavigate } from "react-router-dom";
 import "./login.screen.css";
-import { useContext, useState } from "react";
+import { useContext, useState, useEffect } from "react";
 import { IUser, Role } from "../../@types";
 import { AuthContext } from "../../providers/auth-provider";
 import logo from "./../../assets/WE_GROW.png";
 import { UsersStateContext } from "../../providers/users-state.provider";
+
 interface IError {
   field: string;
   message: string;
@@ -27,12 +28,23 @@ const LoginScreen = () => {
   const useUsers = () => useContext(UsersStateContext);
   const { state, dispatch } = useUsers();
   const { storeUser } = useContext(AuthContext);
+
+  // Fetch user before validating login (to make sure state.currentUser is populated)
+  useEffect(() => {
+    if (user.email) {
+      dispatch({
+        type: "GET_USER_WITH_EMAIL",
+        payload: user.email,
+      });
+    }
+  }, [user.email, dispatch]);
+
   const handleSubmit = () => {
     const errors = validateUser(user);
     if (errors.length > 0) {
       setErrorsList(errors);
     } else {
-      setLoading((_) => true);
+      setLoading(true);
       setErrorsList([]);
       storeUser(state.currentUser!);
 
@@ -51,49 +63,41 @@ const LoginScreen = () => {
   };
 
   const handleChange = (field: string, value: any) => {
-    setUser({ ...user!, [field]: value });
+    setUser({ ...user, [field]: value });
   };
 
   const validateUser = (user: IUser): IError[] => {
-    dispatch({
-      type: "GET_USER_WITH_EMAIL",
-      payload: user!.email,
-    });
-
-    console.log("Validating user:", user);
-    console.log("Current state user:", state.currentUser);
-
     const errors: IError[] = [];
 
-    if (!user || !state.currentUser) {
+    if (!user.email || !state.currentUser) {
       errors.push({
         field: "system",
-        message: "missing fields or user not exist",
-      });
-      console.log("errors ", errors);
-    }
-    if (
-      user &&
-      state.currentUser &&
-      user.password != state.currentUser.password
-    ) {
-      errors.push({
-        field: "system",
-        message: "password not correct, try again",
-      });
-      console.log("errors ", errors);
-    }
-    if (!user || user.email.length < 1) {
-      errors.push({
-        field: "email",
-        message: "The email address must contain @ and . symbols",
+        message: "User not found or missing fields.",
       });
     }
 
-    if (!user || user.password.length < 8) {
+    // Password should be at least 8 characters long
+    if (user.password.length < 8) {
       errors.push({
         field: "password",
-        message: "The password must be more than 9 letters",
+        message: "Password must be at least 8 characters long.",
+      });
+    }
+
+    // Email validation (basic check for @ and . symbols)
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(user.email)) {
+      errors.push({
+        field: "email",
+        message: "Please enter a valid email address.",
+      });
+    }
+
+    // Check if the password is correct
+    if (state.currentUser && user.password !== state.currentUser.password) {
+      errors.push({
+        field: "password",
+        message: "Incorrect password, please try again.",
       });
     }
 
