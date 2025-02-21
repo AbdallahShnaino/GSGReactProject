@@ -65,33 +65,6 @@
   background-color: var(--burnt-red);
 }
 
-.button-info {
-  background-color: var(--light-green);
-  color: white;
-}
-
-.button-info:hover {
-  background-color: var(--dark-green);
-}
-
-.session-info {
-  background-color: #f8f9fa;
-  border-radius: 8px;
-  padding: 1.5rem;
-  margin-top: 1.5rem;
-  text-align: left;
-}
-
-.session-info-title {
-  font-size: 1.25rem;
-  color: #333;
-  margin-bottom: 1rem;
-}
-
-.session-info-details p {
-  color: #666;
-  margin: 0.5rem 0;
-}
 
 @media (max-width: 480px) {
   .card {
