@@ -6,6 +6,7 @@ import { getCurrentDate } from "../../utils/helpers";
 import { AuthContext } from "../../providers/auth-provider";
 import { ItemStateContext } from "../../providers/items-state.provider";
 import { Link } from "react-router-dom";
+import "./create-invoice.css"
 const CreateInvoiceScreen = () => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
@@ -64,8 +65,10 @@ const CreateInvoiceScreen = () => {
     }
   };
   return (
-    <div>
-      <Link to={"/admin/product"}> products page </Link>
+    <div className="create-invoice-screen">
+       <div className="corner-square up"></div>
+       <div className="corner-square down"></div>
+      
       <CreateInvoiceForm
         invoice={invoice}
         setInvoice={setInvoice}

@@ -6,7 +6,7 @@ const HomeScreen = () => {
 
   return (
     <div className="Home-screen">
-      <GuestHeader />
+      <GuestHeader activeClass="Home" />
       <section className="landing-section">
         <div className="overlay">
           

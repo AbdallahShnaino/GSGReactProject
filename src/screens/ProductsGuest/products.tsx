@@ -75,7 +75,7 @@ const Products = () => {
 
   return (
     <div className="products-screen">
-      <GuestHeader/>
+      <GuestHeader activeClass="Products"/>
       <div className="search-section">
         <input type="search" onChange={(e)=>{handleNameChange(e)}} value={name} placeholder="Search for products" className=""/>
        <RangeSlider

@@ -3,14 +3,17 @@ import { useState } from "react";
 import weGrowLogo from "../../assets/WE_GROW.png";
 import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-
-const GuestHeader = () => {
-  const [hoveredItem, setHoveredItem] = useState("Home");
+interface IProps{
+  activeClass:string
+}
+const GuestHeader = (props:IProps) => {
+  const [hoveredItem, setHoveredItem] = useState(props.activeClass);
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => {
     setIsSidebarOpen(!isSidebarOpen);
   };
+
 
 
   return (
@@ -25,7 +28,7 @@ const GuestHeader = () => {
       </div>
       <div className={`sidebar-overlay ${isSidebarOpen ? "active" : ""}`} onClick={toggleSidebar}></div>
       <ul className={`nav-list ${isSidebarOpen ? "active" : ""}`}
-          onMouseLeave={() => setHoveredItem("Home")}>
+          onMouseLeave={() => setHoveredItem(props.activeClass)}>
 
         <li 
           className={`nav-item ${hoveredItem === "Home" ? "active" : ""}`}

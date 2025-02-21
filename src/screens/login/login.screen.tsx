@@ -103,7 +103,7 @@ const LoginScreen2 = () => {
 
   return (
     <div className="login-screen">
-      <GuestHeader/>
+      <GuestHeader activeClass="Sign In"/>
       <div className="corner-square up"></div>
       <div className="corner-square down"></div>
       <form action="" className="login-from">
@@ -119,6 +119,7 @@ const LoginScreen2 = () => {
           id="email" 
           className="input" 
           placeholder="Email" 
+          
         />
         <input 
           type="password" 

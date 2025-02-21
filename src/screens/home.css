@@ -65,16 +65,7 @@
     flex-direction: column;
 }
 
-@media (max-width: 600px) {
-    .cta-img {
-        display: none;
-        width: 100%;
-        margin-top: 20px;
-    }
-    .img-cont{
-        display: none;
-    }
-}
+
 
 .img-cont {
     height: 60vh;
@@ -297,7 +288,7 @@ h2.section-title {
     }
     
 }
-@media (max-width:105px) {
+@media (max-width:1050px) {
     .reviews-container {
         flex-direction: column;
         padding: 20px;
