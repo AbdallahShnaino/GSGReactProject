@@ -4,6 +4,7 @@ import { IInvoice, InvoiceStatus } from "../../@types";
 import Logo from "../../assets/WE_GROW.png";
 import "./invoiceListScreen.css";
 import jsPDF from "jspdf";
+import { Link } from "react-router-dom";
 
 interface EditModalProps {
   invoice: IInvoice | null;
@@ -24,6 +25,7 @@ const EditModal: React.FC<EditModalProps> = ({ invoice, onClose, onSave }) => {
       invoiceTax: 0,
       invoiceGrandTotal: 0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     }
   );
 
@@ -128,6 +130,7 @@ const InvoiceListScreen: React.FC = () => {
       invoiceTax: 15.0,
       invoiceGrandTotal: 165.0,
       invoiceStatus: InvoiceStatus.PAID,
+      itemsList: [],
     },
     {
       invoiceId: 2,
@@ -140,6 +143,7 @@ const InvoiceListScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 220.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
     {
       invoiceId: 3,
@@ -152,6 +156,7 @@ const InvoiceListScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 270.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
     {
       invoiceId: 4,
@@ -164,6 +169,7 @@ const InvoiceListScreen: React.FC = () => {
       invoiceTax: 20.0,
       invoiceGrandTotal: 320.0,
       invoiceStatus: InvoiceStatus.PAID,
+      itemsList: [],
     },
     {
       invoiceId: 5,
@@ -176,6 +182,7 @@ const InvoiceListScreen: React.FC = () => {
       invoiceTax: 15.0,
       invoiceGrandTotal: 515.0,
       invoiceStatus: InvoiceStatus.UNPAID,
+      itemsList: [],
     },
   ]);
 
@@ -273,10 +280,14 @@ const InvoiceListScreen: React.FC = () => {
       <header className="logo">
         <img src={Logo} draggable="false" alt="We Grow" />
       </header>
+
       <div className="invoice-header">
         <h1>Invoices</h1>
       </div>
-
+      <nav>
+        <Link to="/admin/invoice/create">Create Invoice</Link>
+        <Link to="/admin/product">Products Management</Link>
+      </nav>
       <div className="filters">
         <div className="search-box">
           <Search size={20} />

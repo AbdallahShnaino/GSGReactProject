@@ -4,7 +4,6 @@ import { IUser, Role } from "../../@types";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/auth-provider";
 import logo from "./../../assets/WE_GROW.png";
-import { stateReducer } from "../../state/users.reducer";
 import { UsersStateContext } from "../../providers/users-state.provider";
 
 interface IError {
@@ -44,7 +43,9 @@ const CreateAccount = () => {
       onSubmit(newUser);
       dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
-        navigate("/client");
+        user.role == Role.CLIENT
+          ? navigate("/client")
+          : navigate("/admin/invoice");
       }, 1500);
     }
   };
@@ -133,7 +134,6 @@ const CreateAccount = () => {
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
-
           <div className="create-account__input">
             {extractErrorsAsList("email", errorsList).map((e, i) => (
               <span key={i} className="create-account__error">

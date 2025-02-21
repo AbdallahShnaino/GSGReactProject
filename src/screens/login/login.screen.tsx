@@ -37,7 +37,9 @@ const LoginScreen = () => {
       setErrorsList([]);
       storeUser(state.currentUser!);
       setTimeout(() => {
-        navigate("/client");
+        state.currentUser!.role == Role.CLIENT
+          ? navigate("/client")
+          : navigate("/admin/invoice");
       }, 1500);
     }
   };
