@@ -1,6 +1,5 @@
 import { jsPDF } from "jspdf";
 import { IInvoice, IItem } from "../@types";
-import { State } from "../state/items.reducer";
 
 export const formateDate = (textDate: string) => {
   const date = new Date(textDate);
