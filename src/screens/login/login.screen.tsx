@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState } from "react";
+import { useContext, useState,useEffect } from "react";
 import { IUser, Role } from "../../@types";
 import { AuthContext } from "../../providers/auth-provider";
 import { UsersStateContext } from "../../providers/users-state.provider";
@@ -28,8 +28,17 @@ const LoginScreen2 = () => {
   const { state, dispatch } = useUsers();
   const { storeUser } = useContext(AuthContext);
 
-  const handleSubmit = (e: React.MouseEvent) => {
-    e.preventDefault();
+  // Fetch user before validating login (to make sure state.currentUser is populated)
+  useEffect(() => {
+    if (user.email) {
+      dispatch({
+        type: "GET_USER_WITH_EMAIL",
+        payload: user.email,
+      });
+    }
+  }, [user.email, dispatch]);
+
+  const handleSubmit = () => {
     const errors = validateUser(user);
     if (errors.length > 0) {
       setErrorsList(errors);
@@ -37,11 +46,12 @@ const LoginScreen2 = () => {
       setLoading(true);
       setErrorsList([]);
       storeUser(state.currentUser!);
-    
+
       setTimeout(() => {
         if(state.currentUser?.role === Role.CLIENT){
           navigate("/client");
-        }else if(state.currentUser?.role === Role.ADMIN){
+        } else if (state.currentUser?.role === Role.ADMIN) {
+          console.log("Navigating to admin dashboard");
           navigate("/admin/invoice/create");
         } else {
           console.error("Unknown user role");
@@ -50,45 +60,42 @@ const LoginScreen2 = () => {
     }
   };
 
-  const handleChange = (field: string, value: string) => {
+  const handleChange = (field: string, value: any) => {
     setUser({ ...user, [field]: value });
   };
 
   const validateUser = (user: IUser): IError[] => {
-    dispatch({
-      type: "GET_USER_WITH_EMAIL",
-      payload: user.email,
-    });
-
     const errors: IError[] = [];
 
-    if (!user || !state.currentUser) {
+    if (!user.email || !state.currentUser) {
       errors.push({
         field: "system",
-        message: "missing fields or user not exist",
-      });
-    }
-    if (
-      user &&
-      state.currentUser &&
-      user.password != state.currentUser.password
-    ) {
-      errors.push({
-        field: "system",
-        message: "password not correct, try again",
-      });
-    }
-    if (!user || user.email.length < 1) {
-      errors.push({
-        field: "email",
-        message: "The email address must contain @ and . symbols",
+        message: "User not found or missing fields.",
       });
     }
 
-    if (!user || user.password.length < 8) {
+    // Password should be at least 8 characters long
+    if (user.password.length < 8) {
       errors.push({
         field: "password",
-        message: "The password must be more than 9 letters",
+        message: "Password must be at least 8 characters long.",
+      });
+    }
+
+    // Email validation (basic check for @ and . symbols)
+    const emailRegex = /\S+@\S+\.\S+/;
+    if (!emailRegex.test(user.email)) {
+      errors.push({
+        field: "email",
+        message: "Please enter a valid email address.",
+      });
+    }
+
+    // Check if the password is correct
+    if (state.currentUser && user.password !== state.currentUser.password) {
+      errors.push({
+        field: "password",
+        message: "Incorrect password, please try again.",
       });
     }
 

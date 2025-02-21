@@ -36,3 +36,6 @@
   color: var(--white);
   background-color: var(--burnt-red);
 }
+.spinner {
+  align-self: center;
+}

@@ -29,7 +29,6 @@ function App() {
             </Guarded>
           }
         />
-        <Route path="/user/create" element={<CreateAccount />} />
         <Route
           path="/admin/invoice/create"
           element={
@@ -56,7 +55,7 @@ function App() {
         />
         <Route path="/login" element={<LoginScreen/>} />
         <Route path="/logout" element={<ManualLogoutScreen />} />
-        <Route path="/products" element={<Products/>} />
+        <Route path="/products" element={<Products />} />
 
         <Route path="*" element={<NotFound />} />
       </Routes>

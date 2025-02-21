@@ -4,12 +4,10 @@ import { IInvoice, InvoiceStatus } from "../../@types";
 import eyeIcon from "../../assets/Eye.png";
 import pdfIcon from "../../assets/pdf.png";
 import { generatePDF } from "../../utils/helpers";
-import { ItemStateContext } from "../../providers/items-state.provider";
 import { InvoicesStateContext } from "../../providers/invoices-state.provider";
 
 const InvoiceRow = (props: IInvoice) => {
   const [showDetails, setShowDetails] = useState(false);
-  const { state } = useContext(ItemStateContext);
   const invoiceReducer = useContext(InvoicesStateContext);
 
   const invoiceStatusClass =
@@ -39,8 +37,7 @@ const InvoiceRow = (props: IInvoice) => {
           <button
             onClick={() => {
               invoiceReducer.state.invoicesList.find(
-                (inv) =>
-                  inv.invoiceId == props.invoiceId && generatePDF(state, inv)
+                (inv) => inv.invoiceId == props.invoiceId && generatePDF(inv)
               );
             }}
           >
@@ -94,8 +91,7 @@ const InvoiceRow = (props: IInvoice) => {
                 onClick={() => {
                   invoiceReducer.state.invoicesList.find(
                     (inv) =>
-                      inv.invoiceId == props.invoiceId &&
-                      generatePDF(state, inv)
+                      inv.invoiceId == props.invoiceId && generatePDF(inv)
                   );
                 }}
               >

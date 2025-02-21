@@ -29,7 +29,6 @@ const CreateAccount = () => {
   const { dispatch } = useContext(UsersStateContext);
 
   const handleSubmit = () => {
-  
     const newUser: IUser = {
       ...user!,
       id: `CLI-2025${Math.trunc(Math.random() * 1000000000)}`,
@@ -44,11 +43,9 @@ const CreateAccount = () => {
       onSubmit(newUser);
       dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
-        if(user.role===Role.ADMIN){
-          navigate("/admin/invoice/create");
-        }else if(user.role===Role.CLIENT) {
-          navigate("/client")
-        }
+        user.role == Role.CLIENT
+          ? navigate("/client")
+          : navigate("/admin/invoice");
       }, 1500);
     }
   };
@@ -140,7 +137,6 @@ const CreateAccount = () => {
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
-
           <div className="create-account__input">
             {extractErrorsAsList("email", errorsList).map((e, i) => (
               <span key={i} className="create-account__error">
