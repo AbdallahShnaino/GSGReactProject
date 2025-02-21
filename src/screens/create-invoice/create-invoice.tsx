@@ -3,13 +3,8 @@ import CreateInvoiceForm from "./form/create-invoice-form";
 import PreviewInvoice from "./preview/preview-invoice";
 import { IInvoice, InvoiceStatus } from "../../@types";
 import { getCurrentDate } from "../../utils/helpers";
-<<<<<<< HEAD
-
-=======
-import { AuthContext } from "../../providers/auth-provider";
-import { ItemStateContext } from "../../providers/items-state.provider";
 import { Link } from "react-router-dom";
->>>>>>> master
+
 const CreateInvoiceScreen = () => {
   const previewRef = useRef<HTMLDivElement>(null);
   const [showPreview, setShowPreview] = useState(false);
