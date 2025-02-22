@@ -17,10 +17,6 @@ const NotFound = () => {
           <p>We can't find the page you are looking for</p>
         </div>
         <div style={{ height: "100px" }}></div>
-
-        <footer className="client__footer">
-          <Footer />
-        </footer>
       </div>
     </>
   );
