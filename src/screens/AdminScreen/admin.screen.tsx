@@ -3,8 +3,9 @@ import { Search, Calendar, Edit2, Trash2, Download, X } from "lucide-react";
 import Header from "../../components/common/header/header";
 import { IInvoice, InvoiceStatus, IItem } from "../../@types";
 import { generatePDF } from "../../utils/helpers";
-import { useSearchParams } from "react-router-dom";
+import { Link, useSearchParams } from "react-router-dom";
 import "./admin.screen.css";
+import AdminHeader from "../../components/common/admin-header/admin-header";
 
 interface IProps {
   invoice: IInvoice | null;
@@ -252,7 +253,7 @@ const AdminScreen: React.FC = () => {
       Array.isArray(invoice.itemsList) &&
       invoice.itemsList.every((item) => typeof item !== "string")
     ) {
-      generatePDF({ itemsList: invoice.itemsList as IItem[] }, invoice);
+      generatePDF(invoice);
     } else {
       console.error("Invalid itemsList format");
     }
@@ -287,8 +288,9 @@ const AdminScreen: React.FC = () => {
   return (
     <div className="invoice-container">
       <Header />
+      <AdminHeader />
       <div className="invoice-header">
-        <h1>Invoices</h1>
+        <h1>Invoices Management</h1>
       </div>
 
       <div className="filters">
