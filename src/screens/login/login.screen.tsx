@@ -160,7 +160,7 @@ const LoginScreen = () => {
           {loading ? "Logging in..." : "Login"}
         </button>
         <p className="signup-text">
-          Don't have an account? <Link to="/user/create">Sign Up</Link>
+          Don't have an account? <Link to="/signup">Sign Up</Link>
         </p>
       </form>
     </div>
