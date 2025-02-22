@@ -108,7 +108,8 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
           </select>
         </div>
         <div className="create-invoice__input">
-          <select
+          <select 
+           className="input cs-input"
             value={invoice.invoiceStatus}
             onChange={(e) =>
               handleChange("invoiceStatus", e.target.value as InvoiceStatus)
@@ -146,7 +147,7 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
             onChange={(e) => setSearchTerm(e.target.value)}
           />
         </div>
-        <div className="item-selection">
+        <div className="item-selection input cs-input">
           {filteredItems.length > 0 ? (
             filteredItems.map((item) => (
               <div key={item.id} className="item-row">
