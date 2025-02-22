@@ -339,7 +339,6 @@ const AdminScreen: React.FC = () => {
         </div>
 
         <button className="filter-button">Filter</button>
-        <button className="add-invoice-button">Add Invoice</button>
       </div>
 
       <div className="invoice-table-container">
