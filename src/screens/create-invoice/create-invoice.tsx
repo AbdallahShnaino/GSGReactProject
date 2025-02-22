@@ -31,7 +31,7 @@ const CreateInvoiceScreen = () => {
   };
   return (
     <div className="create-invoice-screen">
-      <Link className="products-link" to={"./admin/product"}>
+      <Link className="products-link" to={"/admin/product"}>
       products  </Link>
        <div className="corner-square up"></div>
        <div className="corner-square down"></div>
