@@ -43,7 +43,7 @@ const CreateAccount = () => {
       onSubmit(newUser);
       dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
-        user.role == Role.CLIENT ? navigate("/client") : navigate("/admin");
+        user.role == Role.CLIENT ? navigate("/client") : navigate("/admin/invoice/create");
       }, 1500);
     }
   };
