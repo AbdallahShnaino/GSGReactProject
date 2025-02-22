@@ -43,9 +43,7 @@ const CreateAccount = () => {
       onSubmit(newUser);
       dispatch({ type: "ADD_USER", payload: newUser });
       setTimeout(() => {
-        user.role == Role.CLIENT
-          ? navigate("/client")
-          : navigate("/admin/invoice");
+        user.role == Role.CLIENT ? navigate("/client") : navigate("/admin");
       }, 1500);
     }
   };
@@ -105,16 +103,18 @@ const CreateAccount = () => {
 
   return (
     <>
-     <GuestHeader activeClass="Sign up"/>
+      <GuestHeader activeClass="Sign up" />
       <div className="login-screen">
-      <div className="corner-square up"></div>
-      <div className="corner-square down"></div>
+        <div className="corner-square up"></div>
+        <div className="corner-square down"></div>
         {loading && <span className="spinner"></span>}
 
         <div className="login-from .sign-up-form">
           <div className="welcome">
             <h3 className="form-title">Create An Account</h3>
-            <span className="cta-text">Create an account to enjoy all the services!!!</span>
+            <span className="cta-text">
+              Create an account to enjoy all the services!!!
+            </span>
           </div>
           <div className=" create-account__input ">
             {extractErrorsAsList("name", errorsList).map((e, i) => (
@@ -125,15 +125,15 @@ const CreateAccount = () => {
             <input
               className={`
                 input sp-input
-                ${extractErrorsAsList("name", errorsList).length
-                ? "red-border"
-                : "normal-border"}
-                `
-              }
+                ${
+                  extractErrorsAsList("name", errorsList).length
+                    ? "red-border"
+                    : "normal-border"
+                }
+                `}
               id="name"
               type="text"
               placeholder="User Name"
-              
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
@@ -144,14 +144,14 @@ const CreateAccount = () => {
               </span>
             ))}
             <input
-              className={
-                `
+              className={`
                 input sp-input
-                ${extractErrorsAsList("email", errorsList).length
-                ? "red-border"
-                : "normal-border"}
-                `
-              }
+                ${
+                  extractErrorsAsList("email", errorsList).length
+                    ? "red-border"
+                    : "normal-border"
+                }
+                `}
               id="email"
               type="text"
               placeholder="Email Address"
@@ -171,11 +171,12 @@ const CreateAccount = () => {
               placeholder="Address"
               className={`
                 input sp-input
-                ${extractErrorsAsList("address", errorsList).length
-                ? "red-border"
-                : "normal-border"}
-                `
-              }
+                ${
+                  extractErrorsAsList("address", errorsList).length
+                    ? "red-border"
+                    : "normal-border"
+                }
+                `}
               onChange={(e) => handleChange("address", e.target.value)}
             />
           </div>
@@ -187,14 +188,14 @@ const CreateAccount = () => {
               </span>
             ))}
             <input
-              className={
-               `
+              className={`
                 input sp-input
-                ${extractErrorsAsList("phone", errorsList).length
-                ? "red-border"
-                : "normal-border"}
-                `
-              }
+                ${
+                  extractErrorsAsList("phone", errorsList).length
+                    ? "red-border"
+                    : "normal-border"
+                }
+                `}
               id="phone"
               type="text"
               placeholder="Phone Number"
@@ -211,21 +212,33 @@ const CreateAccount = () => {
             <input
               className={`
                 input sp-input
-                ${extractErrorsAsList("password", errorsList).length
-                ? "red-border"
-                : "normal-border"}
-                `
-              }
+                ${
+                  extractErrorsAsList("password", errorsList).length
+                    ? "red-border"
+                    : "normal-border"
+                }
+                `}
               id="password"
               type="password"
               placeholder="Password"
               onChange={(e) => handleChange("password", e.target.value)}
             />
           </div>
-              <select onChange={ (e)=>{handleChange('role',e.target.value)}} className="role-select input sp-input  " name="Role" id="Role">
-                <option value={Role.CLIENT} className="">{Role.CLIENT.toLowerCase()}</option>
-                <option value={Role.ADMIN} className="">{Role.ADMIN.toLowerCase()}</option>
-              </select>
+          <select
+            onChange={(e) => {
+              handleChange("role", e.target.value);
+            }}
+            className="role-select input sp-input  "
+            name="Role"
+            id="Role"
+          >
+            <option value={Role.CLIENT} className="">
+              {Role.CLIENT.toLowerCase()}
+            </option>
+            <option value={Role.ADMIN} className="">
+              {Role.ADMIN.toLowerCase()}
+            </option>
+          </select>
           <button className="login-btn" onClick={handleSubmit}>
             Create New Account
           </button>
