@@ -132,7 +132,6 @@ const ClientScreen = () => {
         <section className="client__header">
           <Header />
         </section>
-        <button onClick={() => {}}>LOG IN</button>
         <section>
           <section className="client__info">
             <img
