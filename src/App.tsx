@@ -13,13 +13,12 @@ import CreateInvoiceScreen from "./screens/create-invoice/create-invoice";
 import Products from "./screens/ProductsGuest/products";
 import LoginScreen from "./screens/login/login.screen";
 
-
 function App() {
   return (
     <div>
       <Routes>
         <Route path="/" element={<HomeScreen />} />
-        <Route path="/logout" element={<ManualLogoutScreen />} />
+        <Route path="/signup" element={<CreateAccount />} />
         <Route path="/admin" element={<AdminScreen />} />
         <Route
           path="/client"
@@ -53,7 +52,7 @@ function App() {
             </Guarded>
           }
         />
-        <Route path="/login" element={<LoginScreen/>} />
+        <Route path="/login" element={<LoginScreen />} />
         <Route path="/logout" element={<ManualLogoutScreen />} />
         <Route path="/products" element={<Products />} />
 

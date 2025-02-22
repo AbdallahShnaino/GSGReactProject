@@ -1,5 +1,5 @@
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useState,useEffect } from "react";
+import { useContext, useState, useEffect } from "react";
 import { IUser, Role } from "../../@types";
 import { AuthContext } from "../../providers/auth-provider";
 import { UsersStateContext } from "../../providers/users-state.provider";
@@ -10,7 +10,7 @@ interface IError {
   message: string;
 }
 
-const LoginScreen2 = () => {
+const LoginScreen = () => {
   const navigate = useNavigate();
   const [user, setUser] = useState<IUser>({
     address: "",
@@ -48,7 +48,8 @@ const LoginScreen2 = () => {
       storeUser(state.currentUser!);
 
       setTimeout(() => {
-        if(state.currentUser?.role === Role.CLIENT){
+        if (state.currentUser?.role === Role.CLIENT) {
+          console.log(state.currentUser?.role);
           navigate("/client");
         } else if (state.currentUser?.role === Role.ADMIN) {
           console.log("Navigating to admin dashboard");
@@ -110,7 +111,7 @@ const LoginScreen2 = () => {
 
   return (
     <div className="login-screen">
-      <GuestHeader activeClass="Sign In"/>
+      <GuestHeader activeClass="Sign In" />
       <div className="corner-square up"></div>
       <div className="corner-square down"></div>
       <form action="" className="login-from">
@@ -119,30 +120,28 @@ const LoginScreen2 = () => {
           make your business faster and safer with us
         </span>
 
-        <input 
-          type="email" 
-          onChange={(e) => handleChange("email", e.target.value)} 
-          name="email" 
-          id="email" 
-          className="input" 
-          placeholder="Email" 
-          
+        <input
+          type="email"
+          onChange={(e) => handleChange("email", e.target.value)}
+          name="email"
+          id="email"
+          className="input"
+          placeholder="Email"
         />
-        <input 
-          type="password" 
-          onChange={(e) => handleChange("password", e.target.value)} 
-          name="password" 
-          id="password" 
-          className="input" 
-          placeholder="Password" 
+        <input
+          type="password"
+          onChange={(e) => handleChange("password", e.target.value)}
+          name="password"
+          id="password"
+          className="input"
+          placeholder="Password"
         />
         {extractErrorsAsList("system", errorsList).map((e, i) => (
-          <p key={i} className="error">{e}</p>
+          <p key={i} className="error">
+            {e}
+          </p>
         ))}
-        <button 
-          className="btn login-btn" 
-          onClick={handleSubmit}
-        >
+        <button className="btn login-btn" onClick={handleSubmit}>
           {loading ? "Logging in..." : "Login"}
         </button>
         <p className="signup-text">
@@ -153,4 +152,4 @@ const LoginScreen2 = () => {
   );
 };
 
-export default LoginScreen2;
+export default LoginScreen;
