@@ -50,7 +50,7 @@ const Products = () => {
 
       if (minPrice || maxPrice) {
         filteredList = filteredList.filter(
-          (inv) => inv.price >= minPrice && inv.price <= maxPrice
+          (item) => item.price >= minPrice && item.price <= maxPrice
         );
       }
 
