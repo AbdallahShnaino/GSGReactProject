@@ -38,7 +38,8 @@ const LoginScreen = () => {
     }
   }, [user.email, dispatch]);
 
-  const handleSubmit = () => {
+  const handleSubmit = (event: React.FormEvent) => {
+    event.preventDefault(); // Prevents form from submitting and reloading
     const errors = validateUser(user);
     if (errors.length > 0) {
       setErrorsList(errors);
@@ -93,7 +94,11 @@ const LoginScreen = () => {
     }
 
     // Check if the password is correct
-    if (state.currentUser && user.password !== state.currentUser.password) {
+    if (
+      user.password.length > 8 &&
+      state.currentUser &&
+      user.password !== state.currentUser.password
+    ) {
       errors.push({
         field: "password",
         message: "Incorrect password, please try again.",
@@ -114,12 +119,21 @@ const LoginScreen = () => {
       <GuestHeader activeClass="Sign In" />
       <div className="corner-square up"></div>
       <div className="corner-square down"></div>
-      <form action="" className="login-from">
+      <form action="" className="login-from" onSubmit={handleSubmit}>
         <h1 className="form-title">Login</h1>
         <span className="cta-text">
           make your business faster and safer with us
         </span>
-
+        {extractErrorsAsList("system", errorsList).map((e, i) => (
+          <p key={i} className="error">
+            {e}
+          </p>
+        ))}
+        {extractErrorsAsList("email", errorsList).map((e, i) => (
+          <p key={i} className="error">
+            {e}
+          </p>
+        ))}
         <input
           type="email"
           onChange={(e) => handleChange("email", e.target.value)}
@@ -128,6 +142,11 @@ const LoginScreen = () => {
           className="input"
           placeholder="Email"
         />
+        {extractErrorsAsList("password", errorsList).map((e, i) => (
+          <p key={i} className="error">
+            {e}
+          </p>
+        ))}
         <input
           type="password"
           onChange={(e) => handleChange("password", e.target.value)}
@@ -136,12 +155,8 @@ const LoginScreen = () => {
           className="input"
           placeholder="Password"
         />
-        {extractErrorsAsList("system", errorsList).map((e, i) => (
-          <p key={i} className="error">
-            {e}
-          </p>
-        ))}
-        <button className="btn login-btn" onClick={handleSubmit}>
+
+        <button className="btn login-btn" type="button" onClick={handleSubmit}>
           {loading ? "Logging in..." : "Login"}
         </button>
         <p className="signup-text">
