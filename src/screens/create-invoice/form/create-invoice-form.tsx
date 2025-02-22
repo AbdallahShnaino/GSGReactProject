@@ -19,7 +19,7 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
   const [searchTerm, setSearchTerm] = useState<string>("");
   const [selectedItems, setSelectedItems] = useState<IItem[]>([]);
 
-  const handleChange = (field: keyof IInvoice, value: any) => {
+  const handleChange = <K extends keyof IInvoice>(field: K, value: IInvoice[K]) => {
     setInvoice((prevInvoice) => ({
       ...prevInvoice,
       [field]: value,
@@ -75,16 +75,22 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
   return (
     <>
       <div className="create-invoice-form">
-        <div className="input">
+        <h1 className="form-title">create invoice</h1>
+        <div className="create-invoice__input">
           <input
+            className="input cs-input"
+            id="invoiceNumber"
             type="text"
             placeholder="Invoice Number (Auto-generated if left blank)"
             onChange={(e) => handleChange("invoiceNumber", e.target.value)}
           />
         </div>
 
-        <div className="input">
+        <div className="create-invoice__input">
           <select
+            className="input cs-input"
+            id="invoiceToClient"
+            value={invoice.invoiceToClient}
             onChange={(e) => handleChange("invoiceToClient", e.target.value)}
           >
             {usersContext.state.usersList.length > 0 ? (
@@ -98,7 +104,7 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
             )}
           </select>
         </div>
-        <div>
+        <div className="create-invoice__input">
           <select
             value={invoice.invoiceStatus}
             onChange={(e) =>
@@ -109,26 +115,28 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
             <option value={InvoiceStatus.UNPAID}>Unpaid</option>
           </select>
         </div>
-
-        <div className="input">
+        <div className="create-invoice__input">
           <input
+            className="input cs-input"
+            id="invoiceDueDate"
             type="date"
             placeholder="Invoice Due Date"
             onChange={(e) => handleChange("invoiceDueDate", e.target.value)}
           />
         </div>
-
-        <div className="input">
+        <div className="create-invoice__input">
           <input
+            className="input cs-input"
+            id="invoiceTax"
             type="number"
             placeholder="Invoice Tax (%)"
             value={invoice.invoiceTax}
             onChange={(e) => handleChange("invoiceTax", Number(e.target.value))}
           />
         </div>
-
-        <div className="input">
+        <div className="create-invoice__input">
           <input
+            className="input cs-input"
             type="text"
             placeholder="Search products..."
             value={searchTerm}
@@ -180,7 +188,31 @@ const CreateInvoiceForm = ({ sendInvoice, invoice, setInvoice }: IProps) => {
           </p>
         </div>
 
-        <button onClick={() => sendInvoice(invoice)}>Next</button>
+        <div className="create-invoice__input">
+          <select 
+            className="input cs-input" 
+            multiple 
+            onChange={(e) => {
+              const selectedIds = Array.from(e.target.selectedOptions)
+                .map(option => Number(option.value));
+              const selectedItems = itemsContext.state.itemsList
+                .filter(item => selectedIds.includes(item.id));
+              setSelectedItems(selectedItems);
+            }}
+          >
+            {filteredItems.length > 0 ? (
+              filteredItems.map((item) => (
+                <option key={item.id} value={item.id}>
+                  {`Category: ${item.category} | Name: ${item.name} | Price: $${item.price} | Discount: ${item.discount}%`}
+                </option>
+              ))
+            ) : (
+              <option disabled>No matching products found</option>
+            )}
+          </select>
+        </div>
+
+        <button className="login-btn" onClick={() => sendInvoice(invoice)}>Next</button>
       </div>
     </>
   );

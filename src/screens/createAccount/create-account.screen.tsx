@@ -1,10 +1,10 @@
-import { useContext, useReducer, useState } from "react";
+import { useContext, useState } from "react";
 import "./create-account.screen.css";
 import { IUser, Role } from "../../@types";
 import { Link, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../providers/auth-provider";
-import logo from "./../../assets/WE_GROW.png";
 import { UsersStateContext } from "../../providers/users-state.provider";
+import GuestHeader from "../../components/guestHeader/guestHeader";
 
 interface IError {
   field: string;
@@ -105,32 +105,35 @@ const CreateAccount = () => {
 
   return (
     <>
-      <nav className="c-header">
-        <img className="header__logo" src={logo} alt="logo" />
-      </nav>
-      <div className="create-account">
+     <GuestHeader activeClass="Sign up"/>
+      <div className="login-screen">
+      <div className="corner-square up"></div>
+      <div className="corner-square down"></div>
         {loading && <span className="spinner"></span>}
 
-        <div className="create-account__form">
+        <div className="login-from .sign-up-form">
           <div className="welcome">
-            <h3>Create An Account</h3>
-            <span>Create an account to enjoy all the services!!!</span>
+            <h3 className="form-title">Create An Account</h3>
+            <span className="cta-text">Create an account to enjoy all the services!!!</span>
           </div>
-          <div className="create-account__input">
+          <div className=" create-account__input ">
             {extractErrorsAsList("name", errorsList).map((e, i) => (
               <span key={i} className="create-account__error">
                 {e}
               </span>
             ))}
             <input
-              className={
-                extractErrorsAsList("name", errorsList).length
-                  ? "red-border"
-                  : "normal-border"
+              className={`
+                input sp-input
+                ${extractErrorsAsList("name", errorsList).length
+                ? "red-border"
+                : "normal-border"}
+                `
               }
               id="name"
               type="text"
               placeholder="User Name"
+              
               onChange={(e) => handleChange("name", e.target.value)}
             />
           </div>
@@ -142,9 +145,12 @@ const CreateAccount = () => {
             ))}
             <input
               className={
-                extractErrorsAsList("email", errorsList).length
-                  ? "red-border"
-                  : "normal-border"
+                `
+                input sp-input
+                ${extractErrorsAsList("email", errorsList).length
+                ? "red-border"
+                : "normal-border"}
+                `
               }
               id="email"
               type="text"
@@ -163,10 +169,12 @@ const CreateAccount = () => {
               id="address"
               type="text"
               placeholder="Address"
-              className={
-                extractErrorsAsList("address", errorsList).length
-                  ? "red-border"
-                  : "normal-border"
+              className={`
+                input sp-input
+                ${extractErrorsAsList("address", errorsList).length
+                ? "red-border"
+                : "normal-border"}
+                `
               }
               onChange={(e) => handleChange("address", e.target.value)}
             />
@@ -180,9 +188,12 @@ const CreateAccount = () => {
             ))}
             <input
               className={
-                extractErrorsAsList("phone", errorsList).length
-                  ? "red-border"
-                  : "normal-border"
+               `
+                input sp-input
+                ${extractErrorsAsList("phone", errorsList).length
+                ? "red-border"
+                : "normal-border"}
+                `
               }
               id="phone"
               type="text"
@@ -198,10 +209,12 @@ const CreateAccount = () => {
               </span>
             ))}
             <input
-              className={
-                extractErrorsAsList("password", errorsList).length
-                  ? "red-border"
-                  : "normal-border"
+              className={`
+                input sp-input
+                ${extractErrorsAsList("password", errorsList).length
+                ? "red-border"
+                : "normal-border"}
+                `
               }
               id="password"
               type="password"
@@ -209,22 +222,11 @@ const CreateAccount = () => {
               onChange={(e) => handleChange("password", e.target.value)}
             />
           </div>
-          <select
-            onChange={(e) => {
-              handleChange("role", e.target.value);
-            }}
-            className="role-select"
-            name="Role"
-            id="Role"
-          >
-            <option value={Role.CLIENT} className="">
-              {Role.CLIENT}
-            </option>
-            <option value={Role.ADMIN} className="">
-              {Role.ADMIN}
-            </option>
-          </select>
-          <button className="create-account__button" onClick={handleSubmit}>
+              <select onChange={ (e)=>{handleChange('role',e.target.value)}} className="role-select input sp-input  " name="Role" id="Role">
+                <option value={Role.CLIENT} className="">{Role.CLIENT.toLowerCase()}</option>
+                <option value={Role.ADMIN} className="">{Role.ADMIN.toLowerCase()}</option>
+              </select>
+          <button className="login-btn" onClick={handleSubmit}>
             Create New Account
           </button>
           <span>

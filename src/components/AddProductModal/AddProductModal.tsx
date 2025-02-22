@@ -127,5 +127,8 @@ const AddProductModal: React.FC<Props> = ({
     </div>
   );
 };
+  
+
+
 
 export default AddProductModal;

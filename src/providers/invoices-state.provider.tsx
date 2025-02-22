@@ -32,7 +32,7 @@ const InvoicesStateProvider = ({ children }: IProps) => {
   useLayoutEffect(() => {
     if (!loading) {
       const invoicesList: IInvoice[] = storedData || [];
-      dispatch({ type: "INIT", payload: invoicesList });
+      dispatch({type:"INIT",payload:invoicesList});
     }
   }, [loading, storedData]);
 
